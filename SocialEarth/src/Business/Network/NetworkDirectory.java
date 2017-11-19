@@ -15,7 +15,12 @@ import java.util.ArrayList;
  * @author ragha
  */
 public class NetworkDirectory {
+
     private ArrayList<Network> networkList;
+
+    public NetworkDirectory() {
+        networkList = new ArrayList<Network>();
+    }
 
     public ArrayList<Network> getNetworkList() {
         return networkList;
@@ -24,7 +29,8 @@ public class NetworkDirectory {
     public void setNetworkList(ArrayList<Network> networkList) {
         this.networkList = networkList;
     }
-      public Network createAndAddNetwork(String name){
+
+    public Network createAndAddNetwork(String name) {
         Network network = new Network();
         network.setName(name);
         networkList.add(network);

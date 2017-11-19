@@ -12,8 +12,21 @@ import Business.Enterprise.EnterpriseDirectory;
  * @author ragha
  */
 public class Zone {
-    
+
     String name;
+    private EnterpriseDirectory enterpriseDirectory;
+
+    public Zone() {
+        enterpriseDirectory = new EnterpriseDirectory();
+    }
+
+    public EnterpriseDirectory getEnterpriseDirectory() {
+        return enterpriseDirectory;
+    }
+
+    public void setEnterpriseDirectory(EnterpriseDirectory enterpriseDirectory) {
+        this.enterpriseDirectory = enterpriseDirectory;
+    }
 
     public String getName() {
         return name;
@@ -22,7 +35,5 @@ public class Zone {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
+
 }

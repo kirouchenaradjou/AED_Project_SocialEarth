@@ -6,6 +6,7 @@
 package Business.Zone;
 
 import Business.Enterprise.EnterpriseDirectory;
+import Business.Network.Network;
 import java.util.ArrayList;
 
 /**
@@ -13,23 +14,22 @@ import java.util.ArrayList;
  * @author ragha
  */
 public class ZoneDirectory {
+
     private ArrayList<Zone> zoneDirectory;
-    private EnterpriseDirectory enterpriseDirectory;
 
-    public EnterpriseDirectory getEnterpriseDirectory() {
-        return enterpriseDirectory;
-    }
-
-    public void setEnterpriseDirectory(EnterpriseDirectory enterpriseDirectory) {
-        this.enterpriseDirectory = enterpriseDirectory;
+    public ZoneDirectory() {
+        this.zoneDirectory = new ArrayList<Zone>();
     }
 
     public ArrayList<Zone> getZoneDirectory() {
-        return zoneDirectory;
+        return this.zoneDirectory;
     }
 
-    public void setZoneDirectory(ArrayList<Zone> zoneDirectory) {
-        this.zoneDirectory = zoneDirectory;
+    public Zone createAndAddZone(String name) {
+        Zone zone = new Zone();
+        zone.setName(name);
+        zoneDirectory.add(zone);
+        return zone;
     }
-    
+
 }

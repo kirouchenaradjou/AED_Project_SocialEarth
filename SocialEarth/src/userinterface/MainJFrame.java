@@ -5,12 +5,12 @@
 package UserInterface;
 
 import Business.EcoSystem;
-import Business.ConfigureASystem;
 import Business.DB4OUtil.DB4OUtil;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.Zone.Zone;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -137,32 +137,36 @@ public class MainJFrame extends javax.swing.JFrame {
             //Step2: Go inside each network to check each enterprise
             for (Network network : system.getNetworkDirectory().getNetworkList()) {
                 //Step 2-a: Check against each enterprise
-                for (Enterprise enterprise : network.getZoneDirectory().getEnterpriseDirectory().getEnterpriseList()) {
-                    userAccount = enterprise.getUserAccountDirectory().authenticateUser(userName, password);
-                    if (userAccount == null) {
-                        //Step3: Check against each organization inside that enterprise
-                        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-                            userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
-                            if (userAccount != null) {
+                if (network.getZoneDirectory().getZoneDirectory() != null) {
+                    for (Zone zone : network.getZoneDirectory().getZoneDirectory()) {
+
+                        for (Enterprise enterprise : zone.getEnterpriseDirectory().getEnterpriseList()) {
+                            userAccount = enterprise.getUserAccountDirectory().authenticateUser(userName, password);
+                            if (userAccount == null) {
+                                //Step3: Check against each organization inside that enterprise
+                                for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                                    userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
+                                    if (userAccount != null) {
+                                        inEnterprise = enterprise;
+                                        inOrganization = organization;
+                                        break;
+                                    }
+                                }
+                            } else {
                                 inEnterprise = enterprise;
-                                inOrganization = organization;
+                                break;
+                            }
+                            if (inOrganization != null) {
                                 break;
                             }
                         }
-                    } else {
-                        inEnterprise = enterprise;
-                        break;
+                        if (inEnterprise != null) {
+                            break;
+                        }
                     }
-                    if (inOrganization != null) {
-                        break;
-                    }
-                }
-                if (inEnterprise != null) {
-                    break;
                 }
             }
         }
-
         if (userAccount == null) {
             JOptionPane.showMessageDialog(null, "Invalid Credentails!");
             return;
@@ -171,7 +175,7 @@ public class MainJFrame extends javax.swing.JFrame {
             container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
             layout.next(container);
         }
-         loginJButton.setEnabled(false);
+        loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);

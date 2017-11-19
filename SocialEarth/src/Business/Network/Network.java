@@ -10,14 +10,12 @@ import Business.Role.Role;
 import Business.Zone.ZoneDirectory;
 import java.util.ArrayList;
 
+public class Network {
 
-public class Network{
-    
     private String name;
     private ZoneDirectory zoneDirectory;
 
     public Network() {
-       
         zoneDirectory = new ZoneDirectory();
     }
 
@@ -42,5 +40,4 @@ public class Network{
         return name;
     }
 
-   
 }
