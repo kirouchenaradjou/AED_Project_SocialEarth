@@ -7,6 +7,9 @@
 package userinterface.AdministrativeRole;
 
 import Business.Enterprise.Enterprise;
+import UserInterface.AdministrativeRole.ManageEmployeeJPanel;
+import UserInterface.AdministrativeRole.ManageOrganizationJPanel;
+import UserInterface.AdministrativeRole.ManageUserAccountJPanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
