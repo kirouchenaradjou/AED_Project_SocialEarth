@@ -13,7 +13,7 @@ import Business.Enterprise.EnterpriseDirectory;
  */
 public class Zone {
 
-    String name;
+    private String name;
     private EnterpriseDirectory enterpriseDirectory;
 
     public Zone() {
@@ -36,4 +36,8 @@ public class Zone {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

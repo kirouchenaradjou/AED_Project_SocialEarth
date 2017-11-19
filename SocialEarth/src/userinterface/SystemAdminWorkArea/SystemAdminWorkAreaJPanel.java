@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import userinterface.SystemAdminWorkArea.ManageEnterpriseAdminJPanel;
+import userinterface.SystemAdminWorkArea.ManageEnterpriseJPanel;
 import userinterface.SystemAdminWorkArea.ManageZoneJPanel;
 
 /**
@@ -202,17 +204,17 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageEnterpriseJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEnterpriseJButtonActionPerformed
 
-       /* ManageEnterpriseJPanel manageEnterpriseJPanel = new ManageEnterpriseJPanel(userProcessContainer, system);
+        ManageEnterpriseJPanel manageEnterpriseJPanel = new ManageEnterpriseJPanel(userProcessContainer, system);
         userProcessContainer.add("manageEnterpriseJPanel", manageEnterpriseJPanel);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);*/
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageEnterpriseJButtonActionPerformed
 
     private void manageAdminJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageAdminJButtonActionPerformed
         // TODO add your handling code here:
-      //  ManageEnterpriseAdminJPanel manageEnterpriseAdminJPanel = new ManageEnterpriseAdminJPanel(userProcessContainer, system);
-        //userProcessContainer.add("manageEnterpriseAdminJPanel", manageEnterpriseAdminJPanel);
+        ManageEnterpriseAdminJPanel manageEnterpriseAdminJPanel = new ManageEnterpriseAdminJPanel(userProcessContainer, system);
+        userProcessContainer.add("manageEnterpriseAdminJPanel", manageEnterpriseAdminJPanel);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
