@@ -51,34 +51,46 @@ public class RegisterNewUser extends javax.swing.JPanel {
         signupUsernameField = new javax.swing.JTextField();
         signupPasswordField = new javax.swing.JPasswordField();
         signupBtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        UserEmailTxt = new javax.swing.JPasswordField();
+        ZoneComboBox = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        UserCityTxt = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        UserConfirmEmailTxt = new javax.swing.JPasswordField();
+        UserAdd1Txt = new javax.swing.JPasswordField();
+        UserAdd2Txt = new javax.swing.JPasswordField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Register Now!");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 179, 30));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 179, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Password : ");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 187, -1, 20));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Name : ");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, 20));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, 20));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Username : ");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, 30));
-        add(nameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 140, 30));
-        add(signupUsernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 140, 30));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, 30));
+        add(nameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 200, 30));
+        add(signupUsernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 200, 30));
 
         signupPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signupPasswordFieldActionPerformed(evt);
             }
         });
-        add(signupPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 140, 30));
+        add(signupPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 200, 30));
 
         signupBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         signupBtn.setText("Sign Up");
@@ -87,7 +99,69 @@ public class RegisterNewUser extends javax.swing.JPanel {
                 signupBtnActionPerformed(evt);
             }
         });
-        add(signupBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 120, -1));
+        add(signupBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 510, 120, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("City : ");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 50, 20));
+
+        UserEmailTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserEmailTxtActionPerformed(evt);
+            }
+        });
+        add(UserEmailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 200, 30));
+
+        ZoneComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(ZoneComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 200, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Email : ");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, 20));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Confirm Email : ");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 100, 20));
+
+        UserCityTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserCityTxtActionPerformed(evt);
+            }
+        });
+        add(UserCityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 200, 30));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Zone : ");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 50, 20));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Address 1:");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 80, 20));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Address 2:");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 80, 20));
+
+        UserConfirmEmailTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserConfirmEmailTxtActionPerformed(evt);
+            }
+        });
+        add(UserConfirmEmailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 200, 30));
+
+        UserAdd1Txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserAdd1TxtActionPerformed(evt);
+            }
+        });
+        add(UserAdd1Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 200, 30));
+
+        UserAdd2Txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserAdd2TxtActionPerformed(evt);
+            }
+        });
+        add(UserAdd2Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 200, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void signupPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupPasswordFieldActionPerformed
@@ -120,12 +194,44 @@ public class RegisterNewUser extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_signupBtnActionPerformed
 
+    private void UserEmailTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserEmailTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserEmailTxtActionPerformed
+
+    private void UserCityTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserCityTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserCityTxtActionPerformed
+
+    private void UserConfirmEmailTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserConfirmEmailTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserConfirmEmailTxtActionPerformed
+
+    private void UserAdd1TxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserAdd1TxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserAdd1TxtActionPerformed
+
+    private void UserAdd2TxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserAdd2TxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserAdd2TxtActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField UserAdd1Txt;
+    private javax.swing.JPasswordField UserAdd2Txt;
+    private javax.swing.JPasswordField UserCityTxt;
+    private javax.swing.JPasswordField UserConfirmEmailTxt;
+    private javax.swing.JPasswordField UserEmailTxt;
+    private javax.swing.JComboBox<String> ZoneComboBox;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nameField;
     private javax.swing.JButton signupBtn;
     private javax.swing.JPasswordField signupPasswordField;
