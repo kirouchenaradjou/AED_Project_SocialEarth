@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *
  * @author Divya Priya Emmanuel
  */
-public class UserOptionJPanel extends javax.swing.JPanel {
+public class UserWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Enterprise enterprise;
     private UserAccount userAccount;
@@ -26,7 +26,7 @@ public class UserOptionJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserOptionJPanel
      */
-    public UserOptionJPanel(JPanel userProcessContainer, UserAccount userAccount, EventManagemnetOrg organization, Enterprise enterprise, EcoSystem system) {
+    public UserWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, EventManagemnetOrg organization, Enterprise enterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
@@ -49,12 +49,9 @@ public class UserOptionJPanel extends javax.swing.JPanel {
         EditProTxt = new javax.swing.JButton();
         OptionDashboardTxt = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Select your options");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 280, -1));
 
         OptionRegTxt.setText("Register for an event !!");
         OptionRegTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +59,6 @@ public class UserOptionJPanel extends javax.swing.JPanel {
                 OptionRegTxtActionPerformed(evt);
             }
         });
-        add(OptionRegTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, -1, -1));
 
         EditProTxt.setText("Edit my profile");
         EditProTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +66,6 @@ public class UserOptionJPanel extends javax.swing.JPanel {
                 EditProTxtActionPerformed(evt);
             }
         });
-        add(EditProTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 320, 140, 20));
 
         OptionDashboardTxt.setText("Dash Board");
         OptionDashboardTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -78,12 +73,40 @@ public class UserOptionJPanel extends javax.swing.JPanel {
                 OptionDashboardTxtActionPerformed(evt);
             }
         });
-        add(OptionDashboardTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 140, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(OptionRegTxt))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(301, 301, 301)
+                .addComponent(EditProTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(OptionDashboardTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel3)
+                .addGap(108, 108, 108)
+                .addComponent(OptionRegTxt)
+                .addGap(87, 87, 87)
+                .addComponent(EditProTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
+                .addComponent(OptionDashboardTxt))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void OptionRegTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionRegTxtActionPerformed
         // TODO add your handling code here:
-        
         RegisterForEvent registerForEvent = new RegisterForEvent(userProcessContainer, userAccount, organization, enterprise, system);
         userProcessContainer.add("registerForEvent", registerForEvent);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();

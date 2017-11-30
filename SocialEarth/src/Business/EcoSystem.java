@@ -1,6 +1,6 @@
 package Business;
 
-import Business.Network.Network;
+import Business.Event.EventDirectory;
 import Business.Network.NetworkDirectory;
 import Business.Organization.Organization;
 import Business.Role.Role;
@@ -15,6 +15,7 @@ public class EcoSystem extends Organization {
 
     private static EcoSystem business;
     private NetworkDirectory networkDirectory;
+    private EventDirectory eventDirectory;
 
     public static EcoSystem getInstance() {
         if (business == null) {
@@ -26,9 +27,8 @@ public class EcoSystem extends Organization {
     private EcoSystem() {
         super(null);
         this.networkDirectory = new NetworkDirectory();
+        this.eventDirectory = new EventDirectory();
     }
-
-
 
     @Override
     public ArrayList<Role> getSupportedRole() {
@@ -45,14 +45,18 @@ public class EcoSystem extends Organization {
         this.networkDirectory = networkDirectory;
     }
 
-    public boolean checkIfUsernameIsUnique(String username) {
+    public EventDirectory getEventDirectory() {
+        return eventDirectory;
+    }
 
+    public void setEventDirectory(EventDirectory eventDirectory) {
+        this.eventDirectory = eventDirectory;
+    }
+
+    public boolean checkIfUsernameIsUnique(String username) {
         if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
             return false;
         }
-
-       
-
         return true;
     }
 }

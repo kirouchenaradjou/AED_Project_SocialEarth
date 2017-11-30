@@ -15,20 +15,20 @@ import java.util.ArrayList;
  */
 public class ZoneDirectory {
 
-    private ArrayList<Zone> zoneDirectory;
+    private ArrayList<Zone> zoneList;
 
     public ZoneDirectory() {
-        this.zoneDirectory = new ArrayList<Zone>();
+        this.zoneList = new ArrayList<Zone>();
     }
 
-    public ArrayList<Zone> getZoneDirectory() {
-        return this.zoneDirectory;
+    public ArrayList<Zone> getZoneList() {
+        return this.zoneList;
     }
 
     public Zone createAndAddZone(String name) {
         Zone zone = new Zone();
         zone.setName(name);
-        zoneDirectory.add(zone);
+        zoneList.add(zone);
         return zone;
     }
 

@@ -41,7 +41,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (Network network : system.getNetworkDirectory().getNetworkList()) {
-            for (Zone zone : network.getZoneDirectory().getZoneDirectory()) {
+            for (Zone zone : network.getZoneDirectory().getZoneList()) {
                 for (Enterprise enterprise : zone.getEnterpriseDirectory().getEnterpriseList()) {
                     Object[] row = new Object[3];
                     row[0] = enterprise.getName();
@@ -63,7 +63,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
             networkJComboBox.addItem(network);
         }
         for (Network network : system.getNetworkDirectory().getNetworkList()) {
-            for (Zone zone : network.getZoneDirectory().getZoneDirectory()) {
+            for (Zone zone : network.getZoneDirectory().getZoneList()) {
                 zoneJcomboBox.addItem(zone);
             }
         }

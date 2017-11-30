@@ -7,19 +7,20 @@ package userinterface.EventManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Organization.Organization;
 import Business.Organization.EventManagemnetOrg;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ragha
+ * @author Divya Priya Emmanuel
  */
 public class EventManagerWorkAreaJPanel extends javax.swing.JPanel {
 
+    /**
+     * Creates new form CreateEventJPanel
+     */
     private JPanel userProcessContainer;
     private Enterprise enterprise;
     private UserAccount userAccount;
@@ -27,31 +28,12 @@ public class EventManagerWorkAreaJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private boolean flag = false;
 
-    /**
-     * Creates new form EventManager
-     */
     public EventManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EventManagemnetOrg organization, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.organization = organization;
         this.system = system;
-    }
-
-    public void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
-
-        model.setRowCount(0);
-
-        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[4];
-            row[0] = request;
-            row[1] = request.getSender().getEmployee().getName();
-            row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[3] = request.getStatus();
-
-            model.addRow(row);
-        }
     }
 
     /**
@@ -63,59 +45,93 @@ public class EventManagerWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        workRequestJTable = new javax.swing.JTable();
-        refreshJButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        ViewAllEventsBtn = new javax.swing.JButton();
+        WorkRequestBtn = new javax.swing.JButton();
+        addNewEventBtn = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Event Manager Work Area Panel");
 
-        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Message", "Sender", "Receiver", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(workRequestJTable);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 84, 375, 96));
-
-        refreshJButton.setText("Refresh");
-        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+        ViewAllEventsBtn.setText("View All Events");
+        ViewAllEventsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshJButtonActionPerformed(evt);
+                ViewAllEventsBtnActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, -1, -1));
+
+        WorkRequestBtn.setText("Work Request");
+        WorkRequestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WorkRequestBtnActionPerformed(evt);
+            }
+        });
+
+        addNewEventBtn.setText("Add a new Event");
+        addNewEventBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewEventBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(WorkRequestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addNewEventBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ViewAllEventsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(279, 279, 279))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jLabel3)
+                .addGap(63, 63, 63)
+                .addComponent(ViewAllEventsBtn)
+                .addGap(18, 18, 18)
+                .addComponent(addNewEventBtn)
+                .addGap(18, 18, 18)
+                .addComponent(WorkRequestBtn)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-        populateTable();
-    }//GEN-LAST:event_refreshJButtonActionPerformed
+    private void ViewAllEventsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAllEventsBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ViewAllEventsBtnActionPerformed
+
+    private void WorkRequestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WorkRequestBtnActionPerformed
+        ManageWorkRequestPanel manageWorkRequestJPanel = new ManageWorkRequestPanel(userProcessContainer, userAccount, organization, system);
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("ManageWorkRequestPanel", manageWorkRequestJPanel);
+        cardLayout.next(userProcessContainer);
+    }//GEN-LAST:event_WorkRequestBtnActionPerformed
+
+    private void addNewEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewEventBtnActionPerformed
+        CreateEventJPanel createEventJPanel = new CreateEventJPanel(userProcessContainer, system);
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("createEventJPanel", createEventJPanel);
+        cardLayout.next(userProcessContainer);
+    }//GEN-LAST:event_addNewEventBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton refreshJButton;
-    private javax.swing.JTable workRequestJTable;
+    private javax.swing.JButton ViewAllEventsBtn;
+    private javax.swing.JButton WorkRequestBtn;
+    private javax.swing.JButton addNewEventBtn;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

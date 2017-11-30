@@ -65,14 +65,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             networkNode = new DefaultMutableTreeNode(network.getName());
             networks.insert(networkNode, i);
 
-            zoneList = network.getZoneDirectory().getZoneDirectory();
+            zoneList = network.getZoneDirectory().getZoneList();
             for (int m = 0; m < zoneList.size(); m++) {
                 zone = zoneList.get(m);
                 zoneNode = new DefaultMutableTreeNode(zone.getName());
                 networkNode.insert(zoneNode, m);
                 enterpriseList = zone.getEnterpriseDirectory().getEnterpriseList();
 
-                //getEnterpriseDirectory().getEnterpriseList();
                 for (int j = 0; j < enterpriseList.size(); j++) {
                     enterprise = enterpriseList.get(j);
                     enterpriseNode = new DefaultMutableTreeNode(enterprise.getName());

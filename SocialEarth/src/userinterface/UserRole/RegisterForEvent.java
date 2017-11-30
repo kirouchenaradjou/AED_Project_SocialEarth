@@ -75,10 +75,7 @@ public class RegisterForEvent extends javax.swing.JPanel {
         RegEndTxt = new javax.swing.JTextField();
         eventNameField = new javax.swing.JComboBox<>();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel1.setText("Event Name : ");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
 
         registerForEventBtn.setText("Register for event");
         registerForEventBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -86,51 +83,143 @@ public class RegisterForEvent extends javax.swing.JPanel {
                 registerForEventBtnActionPerformed(evt);
             }
         });
-        add(registerForEventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 160, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Register For Event");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 280, -1));
 
-        EventDetailsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        EventDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Event Details :");
-        EventDetailsPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 140, 30));
-        EventDetailsPanel.add(EventIDTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 140, -1));
 
         jLabel4.setText("Event ID");
-        EventDetailsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 100, 20));
 
         jLabel5.setText("Event name");
-        EventDetailsPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 100, 20));
-        EventDetailsPanel.add(EventNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 140, -1));
 
         jLabel6.setText("Venue");
-        EventDetailsPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 100, 20));
-        EventDetailsPanel.add(EventIDTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 140, -1));
 
         jLabel7.setText("Event Date");
-        EventDetailsPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 100, 20));
-        EventDetailsPanel.add(EventDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 140, -1));
 
         jLabel8.setText("Event Time");
-        EventDetailsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 100, 20));
-        EventDetailsPanel.add(EventTimeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 140, -1));
-        EventDetailsPanel.add(RegStartTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 140, -1));
 
         jLabel9.setText("Registration starts on");
-        EventDetailsPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 120, 20));
 
         jLabel10.setText("Registration ends by");
-        EventDetailsPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 120, 20));
-        EventDetailsPanel.add(RegEndTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 140, -1));
 
-        add(EventDetailsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 540, 300));
+        javax.swing.GroupLayout EventDetailsPanelLayout = new javax.swing.GroupLayout(EventDetailsPanel);
+        EventDetailsPanel.setLayout(EventDetailsPanelLayout);
+        EventDetailsPanelLayout.setHorizontalGroup(
+            EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(EventIDTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(EventNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(EventIDTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(EventDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(EventTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(RegStartTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(RegEndTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        EventDetailsPanelLayout.setVerticalGroup(
+            EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EventIDTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EventNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EventIDTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EventDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EventTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RegStartTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RegEndTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         eventNameField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(eventNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 140, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabel1)
+                .addGap(72, 72, 72)
+                .addComponent(eventNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(EventDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(310, 310, 310)
+                .addComponent(registerForEventBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel3)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(eventNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(EventDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(registerForEventBtn))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerForEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerForEventBtnActionPerformed
@@ -145,7 +234,7 @@ public class RegisterForEvent extends javax.swing.JPanel {
 
         Organization org = null;
         for (Network eachNetwork : system.getNetworkDirectory().getNetworkList()) {
-            for (Zone eachZone : eachNetwork.getZoneDirectory().getZoneDirectory()) {
+            for (Zone eachZone : eachNetwork.getZoneDirectory().getZoneList()) {
                 for (Enterprise eachEnterprise : eachZone.getEnterpriseDirectory().getEnterpriseList()) {
                     for (Organization eachOrg : eachEnterprise.getOrganizationDirectory().getOrganizationList()) {
                         if (eachOrg instanceof EventManagemnetOrg) {

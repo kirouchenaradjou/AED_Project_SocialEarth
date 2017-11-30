@@ -48,7 +48,7 @@ public class ManageZoneJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (Network network : system.getNetworkDirectory().getNetworkList()) {
-            for(Zone zone: network.getZoneDirectory().getZoneDirectory()){
+            for(Zone zone: network.getZoneDirectory().getZoneList()){
             Object[] row = new Object[1];
             row[0] = zone.getName();
             model.addRow(row);
