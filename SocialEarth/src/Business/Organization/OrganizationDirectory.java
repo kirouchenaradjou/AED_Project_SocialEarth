@@ -26,6 +26,10 @@ public class OrganizationDirectory {
             organization = new EventManagemnetOrg();
             organizationList.add(organization);
         }
+         if (type.getValue().equals(Type.TransportManagement.getValue())){
+            organization = new TransportOrganization();
+            organizationList.add(organization);
+        }
        
         return organization;
     }

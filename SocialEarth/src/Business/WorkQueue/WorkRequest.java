@@ -4,6 +4,7 @@
  */
 package Business.WorkQueue;
 
+import Business.Event.Event;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
 
@@ -15,11 +16,24 @@ public abstract class WorkRequest {
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    private UserAccount userAccount;
+    private String eventVenue;
+    
+    
     
     public WorkRequest(){
         requestDate = new Date();
     }
 
+    public String getEventVenue() {
+        return eventVenue;
+    }
+
+    public void setEventVenue(String eventVenue) {
+        this.eventVenue = eventVenue;
+    }
+
+   
     public String getMessage() {
         return message;
     }
@@ -30,6 +44,14 @@ public abstract class WorkRequest {
 
     public UserAccount getSender() {
         return sender;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
     public void setSender(UserAccount sender) {
@@ -66,5 +88,11 @@ public abstract class WorkRequest {
 
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return this.message;
     }
 }

@@ -6,9 +6,9 @@ package Business.WorkQueue;
 
 /**
  *
- * @author raunak
+ * @author raghavi
  */
-public class LabTestWorkRequest extends WorkRequest{
+public class RoleWorkRequest extends WorkRequest{
     
     private String testResult;
 

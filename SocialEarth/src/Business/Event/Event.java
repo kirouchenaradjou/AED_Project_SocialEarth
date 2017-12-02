@@ -28,6 +28,7 @@ public class Event {
 
     public Event() {
         zone = new Zone();
+        network = new Network();
         regStartDate = new Date();
         regEndDate = new Date();
         eventDate = new Date();
@@ -113,4 +114,8 @@ public class Event {
         this.network = network;
     }
 
+    @Override
+    public String toString() {
+        return this.eventName;
+    }
 }

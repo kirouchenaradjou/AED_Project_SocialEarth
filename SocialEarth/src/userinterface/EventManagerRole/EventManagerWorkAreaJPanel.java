@@ -115,15 +115,15 @@ public class EventManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void WorkRequestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WorkRequestBtnActionPerformed
         ManageWorkRequestPanel manageWorkRequestJPanel = new ManageWorkRequestPanel(userProcessContainer, userAccount, organization, system);
-        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add("ManageWorkRequestPanel", manageWorkRequestJPanel);
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
         cardLayout.next(userProcessContainer);
     }//GEN-LAST:event_WorkRequestBtnActionPerformed
 
     private void addNewEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewEventBtnActionPerformed
         CreateEventJPanel createEventJPanel = new CreateEventJPanel(userProcessContainer, system);
-        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add("createEventJPanel", createEventJPanel);
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
         cardLayout.next(userProcessContainer);
     }//GEN-LAST:event_addNewEventBtnActionPerformed
 

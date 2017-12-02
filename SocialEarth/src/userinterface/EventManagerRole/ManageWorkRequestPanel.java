@@ -7,10 +7,15 @@ package userinterface.EventManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Organization.Organization;
+import Business.Network.Network;
 import Business.Organization.EventManagemnetOrg;
+import Business.Organization.Organization;
+import Business.Organization.TransportOrganization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.RoleWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import Business.Zone.Zone;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,6 +41,7 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.organization = organization;
         this.system = system;
+        populateTable();
     }
 
     public void populateTable() {
@@ -44,11 +50,13 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[4];
+            Object[] row = new Object[6];
             row[0] = request;
-            row[1] = request.getSender().getEmployee().getName();
-            row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[3] = request.getStatus();
+            row[1] = request.getEventVenue();
+            row[2] = request.getSender().getEmployee().getName();
+            row[3] = request.getSender().getAddress();
+            row[4] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
+            row[5] = request.getStatus();
 
             model.addRow(row);
         }
@@ -66,23 +74,24 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
         refreshJButton = new javax.swing.JButton();
+        assignJButton = new javax.swing.JButton();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Event Name", "Event Venue", "User Name", "User Address", "Receiver", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -94,11 +103,22 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(workRequestJTable);
+        if (workRequestJTable.getColumnModel().getColumnCount() > 0) {
+            workRequestJTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
+        refreshJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/refresh.png"))); // NOI18N
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshJButtonActionPerformed(evt);
+            }
+        });
+
+        assignJButton.setText("Assign to me & Process");
+        assignJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButtonActionPerformed(evt);
             }
         });
 
@@ -107,19 +127,28 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(450, 450, 450)
-                .addComponent(refreshJButton))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(refreshJButton)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(359, 359, 359)
+                            .addComponent(assignJButton)
+                            .addGap(245, 245, 245)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(40, 40, 40)
                 .addComponent(refreshJButton)
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(assignJButton)
+                .addContainerGap(169, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,8 +156,63 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
+    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+boolean isBreakNeeded= false;
+
+        int selectedRow = workRequestJTable.getSelectedRow();
+
+        if (selectedRow < 0){
+            return;
+        }
+
+        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+        request.setReceiver(userAccount);
+        request.setStatus("In Progress");
+        populateTable();
+        JOptionPane.showMessageDialog(null, "Assigned to you and Sending it to Transport team on your behalf", "Information", JOptionPane.INFORMATION_MESSAGE);
+        // Send it to the Transport Organization
+        RoleWorkRequest requestToTransport = new RoleWorkRequest();
+        requestToTransport.setMessage(request.getMessage());
+        requestToTransport.setSender(userAccount);
+        requestToTransport.setUserAccount(request.getSender());
+        requestToTransport.setEventVenue(request.getEventVenue());
+
+        Organization org = null;
+        for (Network eachNetwork : system.getNetworkDirectory().getNetworkList()) {
+            for (Zone eachZone : eachNetwork.getZoneDirectory().getZoneList()) {
+                for (Enterprise eachEnterprise : eachZone.getEnterpriseDirectory().getEnterpriseList()) {
+                    for (Organization eachOrg : eachEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                        if (eachOrg instanceof TransportOrganization) {
+        
+                org = eachOrg;
+                isBreakNeeded=true;
+
+                break;
+            }
+              if(isBreakNeeded){
+break; //will make you break from outer loop as well
+}          
+        }  if(isBreakNeeded){
+break; //will make you break from outer loop as well
+}          
+                }  if(isBreakNeeded){
+break; //will make you break from outer loop as well
+}          
+            }  if(isBreakNeeded){
+break; //will make you break from outer loop as well
+}          
+        }
+        if (org != null) {
+            org.getWorkQueue().getWorkRequestList().add(requestToTransport);
+            userAccount.getWorkQueue().getWorkRequestList().add(requestToTransport);
+        }
+        JOptionPane.showMessageDialog(null, "Processing!!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_assignJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton assignJButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;

@@ -6,6 +6,7 @@
 package userinterface.EventManagerRole;
 
 import Business.EcoSystem;
+import Business.Event.Event;
 import Business.Network.Network;
 import Business.Zone.Zone;
 import java.util.Date;
@@ -68,8 +69,6 @@ public class CreateEventJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         ManagerEventVenueTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        ManagerEventTimeTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         MaxAlloSpinner = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
@@ -78,40 +77,53 @@ public class CreateEventJPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         ManagerCreateEventBtn = new javax.swing.JButton();
-        ManagerEventDate = new com.toedter.calendar.JDateChooser();
-        ManagerEventRegStartDate = new com.toedter.calendar.JDateChooser();
-        ManagerEventRegEndDate = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         networkComboBox = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         zoneComboBox = new javax.swing.JComboBox();
+        ManagerEventDate = new com.toedter.calendar.JDateChooser();
+        ManagerEventRegStartDate = new com.toedter.calendar.JDateChooser();
+        ManagerEventRegEndDate = new com.toedter.calendar.JDateChooser();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Create an event");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 280, -1));
 
         jLabel2.setText("Event name");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 90, -1));
+        add(ManagerEventNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 160, -1));
 
         jLabel4.setText("Venue");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 90, -1));
+        add(ManagerEventVenueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 187, -1));
 
         jLabel5.setText("Event date");
-
-        jLabel6.setText("Event time");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 306, 90, -1));
 
         jLabel7.setText("Availibility of Transport");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 120, 20));
+        add(MaxAlloSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 160, 30));
 
         jLabel8.setText("Maximum Allocation");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 100, 20));
 
         buttonGroup1.add(NoTransportRadioBtn);
         NoTransportRadioBtn.setSelected(true);
         NoTransportRadioBtn.setText("No");
+        add(NoTransportRadioBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, -1, 20));
 
         buttonGroup1.add(YesTransportRadioBtn);
         YesTransportRadioBtn.setText("Yes");
+        add(YesTransportRadioBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 420, -1, 20));
 
         jLabel9.setText("Registration start date");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, 20));
 
         jLabel10.setText("Registration end date");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 520, 110, 20));
 
         ManagerCreateEventBtn.setText("Create Event");
         ManagerCreateEventBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -119,130 +131,25 @@ public class CreateEventJPanel extends javax.swing.JPanel {
                 ManagerCreateEventBtnActionPerformed(evt);
             }
         });
+        add(ManagerCreateEventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 638, -1, -1));
 
         jLabel11.setText("Network");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 167, 90, -1));
 
         networkComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 networkComboBoxActionPerformed(evt);
             }
         });
+        add(networkComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 164, 160, -1));
 
         jLabel12.setText("Zone");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 219, 90, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(ManagerEventNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(MaxAlloSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(YesTransportRadioBtn)
-                        .addGap(77, 77, 77)
-                        .addComponent(NoTransportRadioBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(ManagerCreateEventBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(80, 80, 80)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ManagerEventTimeTxt)
-                                    .addComponent(ManagerEventDate, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80)
-                                .addComponent(ManagerEventVenueTxt))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ManagerEventRegStartDate, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                            .addComponent(ManagerEventRegEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(networkComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(zoneComboBox, 0, 160, Short.MAX_VALUE))))
-                .addContainerGap(146, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManagerEventNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(zoneComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManagerEventVenueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManagerEventDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManagerEventTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MaxAlloSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(YesTransportRadioBtn)
-                    .addComponent(NoTransportRadioBtn))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManagerEventRegStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManagerEventRegEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(ManagerCreateEventBtn))
-        );
+        add(zoneComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 216, 160, -1));
+        add(ManagerEventDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 190, -1));
+        add(ManagerEventRegStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 190, 20));
+        add(ManagerEventRegEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 520, 190, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void ManagerCreateEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagerCreateEventBtnActionPerformed
@@ -268,9 +175,10 @@ public class CreateEventJPanel extends javax.swing.JPanel {
         boolean isTransportAvail = YesTransportRadioBtn.isEnabled();
         Date eventRegStartDate = ManagerEventRegStartDate.getDate();
         Date eventRegEndDate = ManagerEventRegEndDate.getDate();
-        system.getEventDirectory().createAndAddEvent(eventName, selectedNetwork,
+        Event newEvent = system.getEventDirectory().createAndAddEvent(eventName, selectedNetwork,
                 selectedZone, venueName, eventDate, maxAllowed,
                 isTransportAvail, eventRegStartDate, eventRegEndDate);
+        newEvent.setEventName(eventName);
     }//GEN-LAST:event_ManagerCreateEventBtnActionPerformed
 
     private void networkComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkComboBoxActionPerformed
@@ -285,7 +193,6 @@ public class CreateEventJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField ManagerEventNameTxt;
     private com.toedter.calendar.JDateChooser ManagerEventRegEndDate;
     private com.toedter.calendar.JDateChooser ManagerEventRegStartDate;
-    private javax.swing.JTextField ManagerEventTimeTxt;
     private javax.swing.JTextField ManagerEventVenueTxt;
     private javax.swing.JSpinner MaxAlloSpinner;
     private javax.swing.JRadioButton NoTransportRadioBtn;
@@ -298,7 +205,6 @@ public class CreateEventJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
