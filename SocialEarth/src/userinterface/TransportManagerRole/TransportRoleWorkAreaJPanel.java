@@ -6,11 +6,14 @@ package userinterface.TransportManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Location.AddressConverter;
+import Business.Location.Location;
 import Business.Organization.Organization;
 import Business.Organization.TransportOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.RoleWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import Helper.DistanceCalculation;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,7 +29,11 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     private UserAccount userAccount;
     private TransportOrganization transportOrganization;
-        private Enterprise enterprise;
+    private Enterprise enterprise;
+    String latLong = "";
+    String locationArray[] = new String[10];
+
+
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
@@ -169,8 +176,20 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
         RoleWorkRequest request = (RoleWorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
      
         request.setStatus("Processing");
+        AddressConverter addressConverter_user = new AddressConverter();
+            latLong = addressConverter_user.getLocation(request.getUserAccount().getAddress());
+            locationArray = latLong.split(",");
+            String latitude_user = locationArray[0];
+            String longitutue_user = locationArray[1];
+         AddressConverter addressConverter_event = new AddressConverter();
+        String latLong_event = addressConverter_event.getLocation(request.getEventVenue());
+        String[] locationArray_event = latLong_event.split(",");
+            String latitude_event = locationArray_event[0];
+            String longitutue_event = locationArray_event[1];
+        DistanceCalculation distCalc = new DistanceCalculation();
+        Double miles = distCalc.distance(Double.parseDouble(latitude_user), Double.parseDouble(longitutue_user), Double.parseDouble(latitude_event), Double.parseDouble(longitutue_event), 'M');
         
-        ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request,enterprise,userAccount,business);
+         ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request,enterprise,userAccount,business,miles);
         userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
