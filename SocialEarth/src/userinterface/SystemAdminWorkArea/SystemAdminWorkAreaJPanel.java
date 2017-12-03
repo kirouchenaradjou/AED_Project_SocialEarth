@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import Business.Zone.Zone;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -25,15 +26,21 @@ import userinterface.SystemAdminWorkArea.ManageZoneJPanel;
  */
 public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
-    JPanel userProcessContainer;
-    EcoSystem system;
+    private JPanel userProcessContainer;
+    private EcoSystem system;
+    private UserAccount account;
+    private Organization organization;
+    private Enterprise enterprise;
 
     /**
      * Creates new form AdminWorkAreaJPanel
      */
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem system) {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
         this.system = system;
 
         populateTree();

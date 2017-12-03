@@ -8,6 +8,7 @@ package userinterface.UserRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Event.Event;
+import Business.GoogleAPIs.GroupEmail;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.EventManagemnetOrg;
@@ -22,7 +23,7 @@ import javax.swing.JPanel;
  * @author ragha
  */
 public class RegisterForEvent extends javax.swing.JPanel {
-
+    
     private JPanel userProcessContainer;
     private Enterprise enterprise;
     private UserAccount userAccount;
@@ -33,7 +34,6 @@ public class RegisterForEvent extends javax.swing.JPanel {
     /**
      * Creates new form EventManager
      */
-  
     public RegisterForEvent(JPanel userProcessContainer, UserAccount account, EventManagemnetOrg organization, Enterprise enterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -43,16 +43,15 @@ public class RegisterForEvent extends javax.swing.JPanel {
         this.system = system;
         populateEventComboBox();
     }
-
-   
-private void populateEventComboBox()
-    {
-             eventNameField.removeAllItems();
-
+    
+    private void populateEventComboBox() {
+        eventNameField.removeAllItems();
+        
         for (Event event : system.getEventDirectory().getEventList()) {
             eventNameField.addItem(event);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,7 +80,7 @@ private void populateEventComboBox()
         RegEndTxt = new javax.swing.JTextField();
         eventNameField = new javax.swing.JComboBox<>();
 
-        jLabel1.setText("Event Name : ");
+        jLabel1.setText("Select an Event : ");
 
         registerForEventBtn.setText("Register for event");
         registerForEventBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -134,32 +133,35 @@ private void populateEventComboBox()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(EventDetailsPanelLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
-                        .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(70, 70, 70)
-                                .addComponent(EventDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(70, 70, 70)
-                                .addComponent(eventVenueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(70, 70, 70)
-                                .addComponent(EventNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addComponent(EventIDTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(EventDetailsPanelLayout.createSequentialGroup()
-                                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(RegStartTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(RegEndTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(177, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(EventIDTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(EventNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(eventVenueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(EventDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel9)
+                        .addGap(80, 80, 80)
+                        .addComponent(RegStartTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EventDetailsPanelLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(RegEndTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         EventDetailsPanelLayout.setVerticalGroup(
             EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +192,7 @@ private void populateEventComboBox()
                 .addGroup(EventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RegEndTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         eventNameField.addActionListener(new java.awt.event.ActionListener() {
@@ -214,13 +216,12 @@ private void populateEventComboBox()
                         .addGap(72, 72, 72)
                         .addComponent(eventNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(313, 313, 313)
+                        .addGap(118, 118, 118)
+                        .addComponent(EventDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(318, 318, 318)
                         .addComponent(registerForEventBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(328, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(EventDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
+                .addGap(166, 166, 166))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,25 +230,21 @@ private void populateEventComboBox()
                 .addComponent(jLabel3)
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eventNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(EventDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(37, 37, 37)
                 .addComponent(registerForEventBtn)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerForEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerForEventBtnActionPerformed
-        String eventName = eventNameField.getSelectedItem().toString();
-        if (eventName.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Event name cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        Event selectedEvent = (Event) eventNameField.getSelectedItem();
         RoleWorkRequest newRequest = new RoleWorkRequest();
         newRequest.setSender(userAccount);
-        newRequest.setMessage(eventName);
+        newRequest.setMessage(selectedEvent.getEventName());
         newRequest.setEventVenue(eventVenueTextField.getText());
         
         Organization org = null;
@@ -267,12 +264,15 @@ private void populateEventComboBox()
             org.getWorkQueue().getWorkRequestList().add(newRequest);
             userAccount.getWorkQueue().getWorkRequestList().add(newRequest);
         }
+        system.addRegisteredEventUser(userAccount);
+        JOptionPane.showMessageDialog(null, "Successfully registered for the event!!");
+        GroupEmail.sendMail(selectedEvent, userAccount);
     }//GEN-LAST:event_registerForEventBtnActionPerformed
 
     private void eventNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventNameFieldActionPerformed
         // populate the event details
-          Event event = (Event) eventNameField.getSelectedItem();
-        if (event != null){
+        Event event = (Event) eventNameField.getSelectedItem();
+        if (event != null) {
             EventIDTxt.setText(String.valueOf(event.getEventId()));
             EventNameTxt.setText(event.getEventName());
             eventVenueTextField.setText(event.getVenue());
@@ -280,7 +280,7 @@ private void populateEventComboBox()
             RegStartTxt.setText(event.getRegStartDate().toString());
             RegEndTxt.setText(event.getRegEndDate().toString());
         }
-        
+
     }//GEN-LAST:event_eventNameFieldActionPerformed
 
 

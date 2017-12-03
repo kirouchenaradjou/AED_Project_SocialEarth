@@ -7,9 +7,11 @@ package userinterface.UserRole;
 
 import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import Business.Role.Role;
 import Business.Role.UserRole;
+import Business.Zone.Zone;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,14 +26,22 @@ public class RegisterNewUser extends javax.swing.JPanel {
      * Creates new form RegisterNewUser
      */
     private JPanel userProcessContainer;
-//    private UserAccount account;
     private EcoSystem system;
 
     public RegisterNewUser(JPanel userProcessContainer, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-//        this.account = account;
         this.system = system;
+        populateZoneComboBox();
+    }
+
+    public void populateZoneComboBox() {
+        ZoneComboBox.removeAllItems();
+        for (Network eachNetwork : system.getNetworkDirectory().getNetworkList()) {
+            for (Zone eachZone : eachNetwork.getZoneDirectory().getZoneList()) {
+                ZoneComboBox.addItem(eachZone);
+            }
+        }
     }
 
     /**
@@ -52,7 +62,7 @@ public class RegisterNewUser extends javax.swing.JPanel {
         signupPasswordField = new javax.swing.JPasswordField();
         signupBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        ZoneComboBox = new javax.swing.JComboBox<>();
+        ZoneComboBox = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -94,7 +104,11 @@ public class RegisterNewUser extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("City : ");
 
-        ZoneComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ZoneComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ZoneComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Email : ");
@@ -239,8 +253,19 @@ public class RegisterNewUser extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Password cannot be empty!", "Warning!", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Employee employee = system.getEmployeeDirectory().createEmployee(name);
-        UserAccount useraccount = system.getUserAccountDirectory().createUserAccount(signupUsername, password, employee, new UserRole(),addressTextField.getText());
+        String city = cityTextField.getText();
+        if (city.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "City cannot be empty!", "Warning!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String address = addressTextField.getText();
+        if (address.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Address cannot be empty!", "Warning!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Zone zone = (Zone) ZoneComboBox.getSelectedItem();
+        Employee employee = system.getEmployeeDirectory().createEmployee(name, zone, city, address);
+        UserAccount useraccount = system.getUserAccountDirectory().createUserAccount(signupUsername, password, employee, new UserRole());
 
         JOptionPane.showMessageDialog(null, "Successfully registered!");
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -248,9 +273,13 @@ public class RegisterNewUser extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_signupBtnActionPerformed
 
+    private void ZoneComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZoneComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ZoneComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ZoneComboBox;
+    private javax.swing.JComboBox ZoneComboBox;
     private javax.swing.JTextField address2TextField;
     private javax.swing.JTextField addressTextField;
     private javax.swing.JTextField cityTextField;

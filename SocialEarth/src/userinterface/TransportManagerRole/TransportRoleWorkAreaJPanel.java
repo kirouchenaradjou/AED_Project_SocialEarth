@@ -6,8 +6,8 @@ package userinterface.TransportManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Location.AddressConverter;
-import Business.Location.Location;
+import Business.GoogleAPIs.AddressConverter;
+import Business.GoogleAPIs.Location;
 import Business.Organization.Organization;
 import Business.Organization.TransportOrganization;
 import Business.UserAccount.UserAccount;
@@ -33,37 +33,36 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
     String latLong = "";
     String locationArray[] = new String[10];
 
-
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public TransportRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business,Enterprise enterprise) {
+    public TransportRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, Enterprise enterprise) {
         initComponents();
-        
+
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
-         this.enterprise = enterprise;
-        this.transportOrganization = (TransportOrganization)organization;
-        
+        this.enterprise = enterprise;
+        this.transportOrganization = (TransportOrganization) organization;
+
         populateTable();
     }
-    
-    public void populateTable(){
-        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
-        
+
+    public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+
         model.setRowCount(0);
-        
-        for(WorkRequest request : transportOrganization.getWorkQueue().getWorkRequestList()){
+
+        for (WorkRequest request : transportOrganization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[7];
             row[0] = request;
             row[1] = request.getEventVenue();
             row[2] = request.getSender().getEmployee().getName();
             row[3] = request.getUserAccount().getEmployee().getName();
-            row[4] = request.getUserAccount().getAddress();
+            row[4] = request.getUserAccount().getEmployee().getAddress();
             row[5] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
             row[6] = request.getStatus();
-            
+
             model.addRow(row);
         }
     }
@@ -82,8 +81,6 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
         assignJButton = new javax.swing.JButton();
         processJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,15 +119,12 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
             workRequestJTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 58, 990, 120));
-
         assignJButton.setText("Assign to me");
         assignJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignJButtonActionPerformed(evt);
             }
         });
-        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, -1, -1));
 
         processJButton.setText("Process");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +132,6 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
                 processJButtonActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, -1, -1));
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -146,54 +139,85 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(920, 920, 920)
+                .addComponent(refreshJButton))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 990, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(assignJButton)
+                .addGap(87, 87, 87)
+                .addComponent(processJButton))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(refreshJButton)
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(assignJButton)
+                    .addComponent(processJButton)))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
 
         int selectedRow = workRequestJTable.getSelectedRow();
-        
-        if (selectedRow < 0){
+
+        if (selectedRow < 0) {
             return;
         }
-        
-        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+
+        WorkRequest request = (WorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
         request.setReceiver(userAccount);
         request.setStatus("Checking");
         populateTable();
         JOptionPane.showMessageDialog(null, "Assigned to you", "Information", JOptionPane.INFORMATION_MESSAGE);
-        
+
     }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
-        
+
         int selectedRow = workRequestJTable.getSelectedRow();
-        
-        if (selectedRow < 0){
+
+        if (selectedRow < 0) {
             return;
         }
-        
-        RoleWorkRequest request = (RoleWorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
-     
+
+        RoleWorkRequest request = (RoleWorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
+
         request.setStatus("Processing");
         AddressConverter addressConverter_user = new AddressConverter();
-            latLong = addressConverter_user.getLocation(request.getUserAccount().getAddress());
-            locationArray = latLong.split(",");
-            String latitude_user = locationArray[0];
-            String longitutue_user = locationArray[1];
-         AddressConverter addressConverter_event = new AddressConverter();
+        latLong = addressConverter_user.getLocation(request.getUserAccount().getEmployee().getAddress());
+        if (latLong.isEmpty()) {
+            return;
+        }
+        locationArray = latLong.split(",");
+        String latitude_user = locationArray[0];
+        String longitutue_user = locationArray[1];
+        AddressConverter addressConverter_event = new AddressConverter();
         String latLong_event = addressConverter_event.getLocation(request.getEventVenue());
         String[] locationArray_event = latLong_event.split(",");
-            String latitude_event = locationArray_event[0];
-            String longitutue_event = locationArray_event[1];
+        String latitude_event = locationArray_event[0];
+        String longitutue_event = locationArray_event[1];
         DistanceCalculation distCalc = new DistanceCalculation();
         Double miles = distCalc.distance(Double.parseDouble(latitude_user), Double.parseDouble(longitutue_user), Double.parseDouble(latitude_event), Double.parseDouble(longitutue_event), 'M');
-        
-         ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request,enterprise,userAccount,business,miles);
+
+        ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request, enterprise, userAccount, business, miles);
         userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-        
+
     }//GEN-LAST:event_processJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed

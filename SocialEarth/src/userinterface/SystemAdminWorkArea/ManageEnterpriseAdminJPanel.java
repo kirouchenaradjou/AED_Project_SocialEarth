@@ -17,7 +17,6 @@ import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-
 public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
@@ -43,48 +42,48 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         for (Network network : system.getNetworkDirectory().getNetworkList()) {
             for (Zone zone : network.getZoneDirectory().getZoneList()) {
-            for (Enterprise enterprise : zone.getEnterpriseDirectory().getEnterpriseList()) {
-                for (UserAccount userAccount : enterprise.getUserAccountDirectory().getUserAccountList()) {
-                    Object[] row = new Object[3];
-                    row[0] = enterprise.getName();
-                    row[1] = network.getName();
-                    row[2] = userAccount.getUsername();
+                for (Enterprise enterprise : zone.getEnterpriseDirectory().getEnterpriseList()) {
+                    for (UserAccount userAccount : enterprise.getUserAccountDirectory().getUserAccountList()) {
+                        Object[] row = new Object[3];
+                        row[0] = enterprise.getName();
+                        row[1] = network.getName();
+                        row[2] = userAccount.getUsername();
 
-                    model.addRow(row);
+                        model.addRow(row);
+                    }
                 }
             }
         }
     }
-    }
 
-    private void populateNetworkComboBox(){
+    private void populateNetworkComboBox() {
         networkJComboBox.removeAllItems();
-        
-        for (Network network : system.getNetworkDirectory().getNetworkList()){
+
+        for (Network network : system.getNetworkDirectory().getNetworkList()) {
             networkJComboBox.addItem(network);
         }
-        
-    }
-    private void populateZoneComboBox()
-    {
-                zoneJcomboBox.removeAllItems();
 
-          for (Network network : system.getNetworkDirectory().getNetworkList()) {
+    }
+
+    private void populateZoneComboBox() {
+        zoneJcomboBox.removeAllItems();
+
+        for (Network network : system.getNetworkDirectory().getNetworkList()) {
             for (Zone zone : network.getZoneDirectory().getZoneList()) {
                 zoneJcomboBox.addItem(zone);
             }
         }
     }
-    
-    private void populateEnterpriseComboBox(Zone zone){
+
+    private void populateEnterpriseComboBox(Zone zone) {
         enterpriseJComboBox.removeAllItems();
-        
-        for (Enterprise enterprise : zone.getEnterpriseDirectory().getEnterpriseList()){
+
+        for (Enterprise enterprise : zone.getEnterpriseDirectory().getEnterpriseList()) {
             enterpriseJComboBox.addItem(enterprise);
         }
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -267,32 +266,31 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
     private void networkJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkJComboBoxActionPerformed
 
-      /*  Zone zone = (Zone) zoneJcomboBox.getSelectedItem();
+        /*  Zone zone = (Zone) zoneJcomboBox.getSelectedItem();
         if (zone != null){
             populateEnterpriseComboBox(zone);
         }*/
-         
-         
+
     }//GEN-LAST:event_networkJComboBoxActionPerformed
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
-        
+
         Enterprise enterprise = (Enterprise) enterpriseJComboBox.getSelectedItem();
-        
+
         String username = usernameJTextField.getText();
         String password = String.valueOf(passwordJPasswordField.getPassword());
         String name = nameJTextField.getText();
-        
-        Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
-        
-        UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new AdminRole(),"Unknown");
+
+        Employee employee = enterprise.getEmployeeDirectory().createEmployee(name, null, "Unknown", "Unknown");
+
+        UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new AdminRole());
         populateTable();
-        
+
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
-         Component[] componentArray = userProcessContainer.getComponents();
+        Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
         sysAdminwjp.populateTree();
@@ -302,9 +300,9 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
     private void zoneJcomboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoneJcomboBoxActionPerformed
         // TODO add your handling code here:
-        
+
         Zone zone = (Zone) zoneJcomboBox.getSelectedItem();
-        if (zone != null){
+        if (zone != null) {
             populateEnterpriseComboBox(zone);
         }
     }//GEN-LAST:event_zoneJcomboBoxActionPerformed

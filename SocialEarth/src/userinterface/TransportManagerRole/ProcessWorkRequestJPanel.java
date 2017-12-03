@@ -28,10 +28,11 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     EcoSystem system;
     private UserAccount userAccount;
     Double miles;
+
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, RoleWorkRequest request, Enterprise enterprise, UserAccount account, EcoSystem system,Double miles) {
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, RoleWorkRequest request, Enterprise enterprise, UserAccount account, EcoSystem system, Double miles) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
@@ -40,23 +41,22 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         this.miles = miles;
         this.system = system;
         callTheProgressBar();
-         panel1.setVisible(false);
+        panel1.setVisible(false);
         populatePanelBody();
 
     }
-    public void callTheProgressBar()
-    {
-        SwingUtilities.invokeLater(new Runnable() {
 
+    public void callTheProgressBar() {
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 CountUpProgressBar cdpb = new CountUpProgressBar();
             }
         });
     }
-    public void populatePanelBody()
-    {
+
+    public void populatePanelBody() {
         panel1.setVisible(true);
-        label1.setText("The distance between the User Address and the Venue is "+miles+ " miles");
+        label1.setText("The distance between the User Address and the Venue is " + miles + " miles");
     }
 
     /**
@@ -165,14 +165,14 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
         request.setTestResult(decisionComboBox.getSelectedItem().toString());
-        request.setStatus("Sent to Event Manager");
+//        request.setStatus("Sent to Event Manager");
 
-        RoleWorkRequest request = new RoleWorkRequest();
+//        RoleWorkRequest request = new RoleWorkRequest();
         request.setMessage(this.request.getMessage());
-        request.setSender(userAccount);
-        request.setStatus("Checking");
+//        request.setReceiver(userAccount);
+        request.setStatus(decisionComboBox.getSelectedItem().toString());
 
-        Organization org = null,org1=null;
+        Organization org = null;
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             if (organization instanceof EventManagemnetOrg) {
                 org = organization;

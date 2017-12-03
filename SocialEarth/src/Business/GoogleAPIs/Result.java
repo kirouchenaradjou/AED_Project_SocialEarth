@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Location;
+package Business.GoogleAPIs;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 

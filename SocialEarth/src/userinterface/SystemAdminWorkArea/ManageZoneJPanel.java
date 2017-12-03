@@ -25,7 +25,7 @@ public class ManageZoneJPanel extends javax.swing.JPanel {
 
     /**
      *
-     * Creates new form ManageNetworkJPanel
+     * Creates new form ManageZoneJPanel
      */
     public ManageZoneJPanel(JPanel userProcessContainer, EcoSystem system) {
         initComponents();
