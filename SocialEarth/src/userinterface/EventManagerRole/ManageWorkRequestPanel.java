@@ -49,7 +49,8 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
 
         model.setRowCount(0);
-
+//        organization.getWorkQueue().getWorkRequestList().removeAll();
+        
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[6];
             row[0] = request;

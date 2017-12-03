@@ -249,7 +249,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Username cannot be empty!", "Warning!", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String password = passwordField.getPassword().toString();
+        String password = String.valueOf(passwordField.getPassword());
         if (password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Password cannot be empty!", "Warning!", JOptionPane.WARNING_MESSAGE);
             return;

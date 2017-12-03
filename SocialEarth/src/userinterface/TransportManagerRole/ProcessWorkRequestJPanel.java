@@ -41,7 +41,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         this.miles = miles;
         this.system = system;
         callTheProgressBar();
-        panel1.setVisible(false);
+//        panel1.setVisible(false);
         populatePanelBody();
 
     }
@@ -56,6 +56,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     public void populatePanelBody() {
         panel1.setVisible(true);
+        label1.setVisible(true);
         label1.setText("The distance between the User Address and the Venue is " + miles + " miles");
     }
 
@@ -69,20 +70,16 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         submitJButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
-        decisionComboBox = new javax.swing.JComboBox<>();
         panel1 = new java.awt.Panel();
         label1 = new java.awt.Label();
 
-        submitJButton.setText("Submit Result");
+        submitJButton.setText("Continue");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitJButtonActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Send the Result");
 
         backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Back3Blue.png"))); // NOI18N
         backJButton.setText("Back");
@@ -92,10 +89,10 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
             }
         });
 
-        decisionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Approve", "Reject" }));
-
         panel1.setBackground(new java.awt.Color(204, 204, 204));
         panel1.setForeground(new java.awt.Color(204, 204, 204));
+
+        label1.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -121,19 +118,14 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(400, 400, 400)
-                        .addComponent(submitJButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(backJButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
-                        .addComponent(jLabel1)
-                        .addGap(87, 87, 87)
-                        .addComponent(decisionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(200, 200, 200)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(372, 372, 372)
+                        .addComponent(submitJButton)))
                 .addContainerGap(276, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -141,13 +133,9 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(decisionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(59, 59, 59)
                 .addComponent(submitJButton)
-                .addGap(90, 90, 90)
+                .addGap(142, 142, 142)
                 .addComponent(backJButton)
                 .addGap(85, 85, 85))
         );
@@ -164,14 +152,25 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
-        request.setTestResult(decisionComboBox.getSelectedItem().toString());
-//        request.setStatus("Sent to Event Manager");
 
-//        RoleWorkRequest request = new RoleWorkRequest();
-        request.setMessage(this.request.getMessage());
-//        request.setReceiver(userAccount);
-        request.setStatus(decisionComboBox.getSelectedItem().toString());
-
+        String status;
+        if (miles > 3) {
+            status = "Rejected";
+        } else {
+            status = "Approved";
+        }
+        request.setTestResult(status);
+        request.setStatus("Sent to Event Manager");
+        
+//        request.setTestResult(decisionComboBox.getSelectedItem().toString());
+////        request.setStatus("Sent to Event Manager");
+//
+        RoleWorkRequest request = new RoleWorkRequest();
+       request.setMessage(this.request.getMessage());
+        request.setReceiver(this.request.getSender());
+        request.setStatus(status);
+        request.setSender(userAccount);
+        request.setEventVenue(this.request.getEventVenue());
         Organization org = null;
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             if (organization instanceof EventManagemnetOrg) {
@@ -189,8 +188,6 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
-    private javax.swing.JComboBox<String> decisionComboBox;
-    private javax.swing.JLabel jLabel1;
     private java.awt.Label label1;
     private java.awt.Panel panel1;
     private javax.swing.JButton submitJButton;
