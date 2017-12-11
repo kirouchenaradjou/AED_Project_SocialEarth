@@ -10,6 +10,7 @@ import Business.Organization.EventManagemnetOrg;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.RoleWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -154,23 +155,22 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
         String status;
-        if (miles > 3) {
+        if (miles > 10) {
             status = "Rejected";
         } else {
             status = "Approved";
         }
         request.setTestResult(status);
         request.setStatus("Sent to Event Manager");
-        
-//        request.setTestResult(decisionComboBox.getSelectedItem().toString());
-////        request.setStatus("Sent to Event Manager");
-//
-        RoleWorkRequest request = new RoleWorkRequest();
-       request.setMessage(this.request.getMessage());
-        request.setReceiver(this.request.getSender());
-        request.setStatus(status);
-        request.setSender(userAccount);
-        request.setEventVenue(this.request.getEventVenue());
+
+        RoleWorkRequest requestToEventManager = new RoleWorkRequest();
+        requestToEventManager.setWorkRequestId(request.getWorkRequestId());
+        requestToEventManager.setMessage(request.getMessage());
+        requestToEventManager.setReceiver(request.getSender());
+        requestToEventManager.setStatus(status);
+        requestToEventManager.setSender(userAccount);
+        requestToEventManager.setUserAccount(request.getUserAccount());
+        requestToEventManager.setEventVenue(request.getEventVenue());
         Organization org = null;
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             if (organization instanceof EventManagemnetOrg) {
@@ -179,10 +179,10 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
             }
         }
         if (org != null) {
-            org.getWorkQueue().getWorkRequestList().add(request);
-            userAccount.getWorkQueue().getWorkRequestList().add(request);
+            org.getWorkQueue().addNewRequest(requestToEventManager);
+            userAccount.getWorkQueue().addNewRequest(requestToEventManager);
         }
-        JOptionPane.showMessageDialog(null, "Processing!!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Work request updated!!!", "Information", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_submitJButtonActionPerformed
 

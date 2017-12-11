@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author raghavi
  */
 public class WorkQueue {
-    
+
     private ArrayList<WorkRequest> workRequestList;
 
     public WorkQueue() {
@@ -20,5 +20,16 @@ public class WorkQueue {
 
     public ArrayList<WorkRequest> getWorkRequestList() {
         return workRequestList;
+    }
+
+    public RoleWorkRequest addNewRequest(RoleWorkRequest newRequest) {
+        for (WorkRequest eachRequest : workRequestList) {
+            if (eachRequest.getWorkRequestId() == newRequest.getWorkRequestId()) {
+                workRequestList.remove(eachRequest);
+                break;
+            }
+        }
+        workRequestList.add(newRequest);
+        return newRequest;
     }
 }

@@ -15,6 +15,7 @@ import Business.Organization.EventManagemnetOrg;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.RoleWorkRequest;
 import Business.Zone.Zone;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -23,7 +24,7 @@ import javax.swing.JPanel;
  * @author ragha
  */
 public class RegisterForEvent extends javax.swing.JPanel {
-    
+
     private JPanel userProcessContainer;
     private Enterprise enterprise;
     private UserAccount userAccount;
@@ -43,10 +44,10 @@ public class RegisterForEvent extends javax.swing.JPanel {
         this.system = system;
         populateEventComboBox();
     }
-    
+
     private void populateEventComboBox() {
         eventNameField.removeAllItems();
-        
+
         for (Event event : system.getEventDirectory().getEventList()) {
             eventNameField.addItem(event);
         }
@@ -243,10 +244,13 @@ public class RegisterForEvent extends javax.swing.JPanel {
     private void registerForEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerForEventBtnActionPerformed
         Event selectedEvent = (Event) eventNameField.getSelectedItem();
         RoleWorkRequest newRequest = new RoleWorkRequest();
+        Random rand = new Random();
+        newRequest.setWorkRequestId(rand.nextInt(50) + 1);
         newRequest.setSender(userAccount);
+        newRequest.setUserAccount(userAccount);
         newRequest.setMessage(selectedEvent.getEventName());
-        newRequest.setEventVenue(eventVenueTextField.getText());
-        
+        newRequest.setEventVenue(selectedEvent.getVenue());
+
         Organization org = null;
         for (Network eachNetwork : system.getNetworkDirectory().getNetworkList()) {
             for (Zone eachZone : eachNetwork.getZoneDirectory().getZoneList()) {
@@ -261,12 +265,12 @@ public class RegisterForEvent extends javax.swing.JPanel {
             }
         }
         if (org != null) {
-            org.getWorkQueue().getWorkRequestList().add(newRequest);
-            userAccount.getWorkQueue().getWorkRequestList().add(newRequest);
+            org.getWorkQueue().addNewRequest(newRequest);
+            userAccount.getWorkQueue().addNewRequest(newRequest);
         }
         system.addRegisteredEventUser(userAccount);
         JOptionPane.showMessageDialog(null, "Successfully registered for the event!!");
-        GroupEmail.sendMail(selectedEvent, userAccount);
+//        GroupEmail.sendMail(selectedEvent, userAccount);
     }//GEN-LAST:event_registerForEventBtnActionPerformed
 
     private void eventNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventNameFieldActionPerformed

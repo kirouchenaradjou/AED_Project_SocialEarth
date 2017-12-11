@@ -4,7 +4,6 @@
  */
 package Business.WorkQueue;
 
-import Business.Event.Event;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
 
@@ -18,10 +17,9 @@ public abstract class WorkRequest {
     private Date resolveDate;
     private UserAccount userAccount;
     private String eventVenue;
-    
-    
-    
-    public WorkRequest(){
+    private int workRequestId;
+
+    public WorkRequest() {
         requestDate = new Date();
     }
 
@@ -33,7 +31,6 @@ public abstract class WorkRequest {
         this.eventVenue = eventVenue;
     }
 
-   
     public String getMessage() {
         return message;
     }
@@ -89,10 +86,17 @@ public abstract class WorkRequest {
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
     }
-    
+
+    public int getWorkRequestId() {
+        return workRequestId;
+    }
+
+    public void setWorkRequestId(int workRequestId) {
+        this.workRequestId = workRequestId;
+    }
+
     @Override
-    public String toString()
-    {
-        return this.message;
+    public String toString() {
+        return String.valueOf(this.workRequestId);
     }
 }

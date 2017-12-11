@@ -50,15 +50,16 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
 //        organization.getWorkQueue().getWorkRequestList().removeAll();
-        
+
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[6];
+            Object[] row = new Object[7];
             row[0] = request;
-            row[1] = request.getEventVenue();
-            row[2] = request.getSender().getEmployee().getName();
-            row[3] = request.getSender().getEmployee().getAddress();
-            row[4] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[5] = request.getStatus();
+            row[1] = request.getMessage();
+            row[2] = request.getEventVenue();
+            row[3] = request.getUserAccount() == null ? null : request.getUserAccount().getEmployee().getName();
+            row[4] = request.getUserAccount() == null ? null : request.getUserAccount().getEmployee().getAddress();
+            row[5] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
+            row[6] = request.getStatus();
 
             model.addRow(row);
         }
@@ -77,24 +78,20 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         workRequestJTable = new javax.swing.JTable();
         refreshJButton = new javax.swing.JButton();
         assignJButton = new javax.swing.JButton();
-        backjButton1 = new javax.swing.JButton();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Event Name", "Event Venue", "User Name", "User Address", "Receiver", "Status"
+                "Request Id", "Event Name", "Event Venue", "User Name", "User Address", "Receiver", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -125,14 +122,6 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
             }
         });
 
-        backjButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        backjButton1.setText("<< Back");
-        backjButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backjButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,16 +130,14 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(359, 359, 359)
-                        .addComponent(refreshJButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(refreshJButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(assignJButton)
+                                .addGap(245, 245, 245))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(backjButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(assignJButton)
-                                .addGap(245, 245, 245))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -160,10 +147,8 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
                 .addComponent(refreshJButton)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(assignJButton)
-                    .addComponent(backjButton1))
+                .addGap(42, 42, 42)
+                .addComponent(assignJButton)
                 .addContainerGap(169, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -188,9 +173,10 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Assigned to you and Sending it to Transport team on your behalf", "Information", JOptionPane.INFORMATION_MESSAGE);
         // Send it to the Transport Organization
         RoleWorkRequest requestToTransport = new RoleWorkRequest();
+        requestToTransport.setWorkRequestId(request.getWorkRequestId());
         requestToTransport.setMessage(request.getMessage());
         requestToTransport.setSender(userAccount);
-        requestToTransport.setUserAccount(request.getSender());
+        requestToTransport.setUserAccount(request.getUserAccount());
         requestToTransport.setEventVenue(request.getEventVenue());
 
         Organization org = null;
@@ -199,10 +185,8 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
                 for (Enterprise eachEnterprise : eachZone.getEnterpriseDirectory().getEnterpriseList()) {
                     for (Organization eachOrg : eachEnterprise.getOrganizationDirectory().getOrganizationList()) {
                         if (eachOrg instanceof TransportOrganization) {
-
                             org = eachOrg;
                             isBreakNeeded = true;
-
                             break;
                         }
                         if (isBreakNeeded) {
@@ -222,8 +206,8 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
             }
         }
         if (org != null) {
-            org.getWorkQueue().getWorkRequestList().add(requestToTransport);
-            userAccount.getWorkQueue().getWorkRequestList().add(requestToTransport);
+            org.getWorkQueue().addNewRequest(requestToTransport);
+            userAccount.getWorkQueue().addNewRequest(requestToTransport);
         }
         JOptionPane.showMessageDialog(null, "Processing!!!", "Information", JOptionPane.INFORMATION_MESSAGE);
 
@@ -239,7 +223,6 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton;
-    private javax.swing.JButton backjButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;

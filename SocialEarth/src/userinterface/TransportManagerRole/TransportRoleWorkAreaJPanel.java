@@ -30,11 +30,13 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private TransportOrganization transportOrganization;
     private Enterprise enterprise;
-    String latLong = "";
-    String locationArray[] = new String[10];
+    String latLong_user = "";
+    String latLong_event = "";
+    String[] locationArray_user = new String[10];
+    String[] locationArray_event = new String[10];
 
     /**
-     * Creates new form LabAssistantWorkAreaJPanel
+     * Creates new form TransportRoleWorkAreaJPanel
      */
     public TransportRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, Enterprise enterprise) {
         initComponents();
@@ -54,14 +56,15 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (WorkRequest request : transportOrganization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[7];
+            Object[] row = new Object[8];
             row[0] = request;
-            row[1] = request.getEventVenue();
-            row[2] = request.getSender().getEmployee().getName();
-            row[3] = request.getUserAccount().getEmployee().getName();
-            row[4] = request.getUserAccount().getEmployee().getAddress();
-            row[5] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[6] = request.getStatus();
+            row[1] = request.getMessage();
+            row[2] = request.getEventVenue();
+            row[3] = request.getSender() == null ? null : request.getSender().getEmployee().getName();
+            row[4] = request.getUserAccount() == null ? null : request.getUserAccount().getEmployee().getName();
+            row[5] = request.getUserAccount() == null ? null : request.getUserAccount().getEmployee().getAddress();
+            row[6] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
+            row[7] = request.getStatus();
 
             model.addRow(row);
         }
@@ -84,20 +87,17 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Event Name", "Event Venue", "Sender - Event Organizer", "User Name", "User Address", "Receiver", "Status"
+                "Request Id", "Event Name", "Event Venue", "Sender - Event Organizer", "User Name", "User Address", "Receiver", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -189,29 +189,35 @@ public class TransportRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
 
         int selectedRow = workRequestJTable.getSelectedRow();
-
         if (selectedRow < 0) {
             return;
         }
-
         RoleWorkRequest request = (RoleWorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
-
         request.setStatus("Processing");
+
         AddressConverter addressConverter_user = new AddressConverter();
-        latLong = addressConverter_user.getLocation(request.getUserAccount().getEmployee().getAddress());
-        if (latLong.isEmpty()) {
+        latLong_user = addressConverter_user.getLocation(request.getUserAccount().getEmployee().getAddress());
+        if (latLong_user.isEmpty()) {
             return;
         }
-        locationArray = latLong.split(",");
-        String latitude_user = locationArray[0];
-        String longitutue_user = locationArray[1];
+        locationArray_user = latLong_user.split(",");
+        String latitude_user = locationArray_user[0];
+        String longitutue_user = locationArray_user[1];
+        
         AddressConverter addressConverter_event = new AddressConverter();
-        String latLong_event = addressConverter_event.getLocation(request.getEventVenue());
-        String[] locationArray_event = latLong_event.split(",");
+        latLong_event = addressConverter_event.getLocation(request.getEventVenue());
+        if (latLong_event.isEmpty()) {
+            return;
+        }
+        locationArray_event = latLong_event.split(",");
         String latitude_event = locationArray_event[0];
         String longitutue_event = locationArray_event[1];
+        
         DistanceCalculation distCalc = new DistanceCalculation();
-        Double miles = distCalc.distance(Double.parseDouble(latitude_user), Double.parseDouble(longitutue_user), Double.parseDouble(latitude_event), Double.parseDouble(longitutue_event), 'M');
+        Double miles = distCalc.distance(Double.parseDouble(latitude_user), 
+                Double.parseDouble(longitutue_user), 
+                Double.parseDouble(latitude_event), 
+                Double.parseDouble(longitutue_event), 'M');
 
         ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request, enterprise, userAccount, business, miles);
         userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
