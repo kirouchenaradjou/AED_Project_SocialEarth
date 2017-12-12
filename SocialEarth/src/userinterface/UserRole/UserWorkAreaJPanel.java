@@ -5,11 +5,11 @@
  */
 package userinterface.UserRole;
 
+import Business.ChatAPI.GoogleTalkChatLogin;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.EventManagemnetOrg;
 import Business.UserAccount.UserAccount;
-import UserInterface.AdministrativeRole.ManageOrganizationJPanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -48,6 +48,7 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
         OptionRegTxt = new javax.swing.JButton();
         EditProTxt = new javax.swing.JButton();
         OptionDashboardTxt = new javax.swing.JButton();
+        chatBtn = new javax.swing.JButton();
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -74,22 +75,33 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        chatBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chaticon.png"))); // NOI18N
+        chatBtn.setText("Have questions? Chat with admin");
+        chatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chatBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(300, 300, 300)
-                .addComponent(OptionRegTxt))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(301, 301, 301)
-                .addComponent(EditProTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(300, 300, 300)
-                .addComponent(OptionDashboardTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(230, 230, 230)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(300, 300, 300)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(chatBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(OptionDashboardTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(OptionRegTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                        .addComponent(EditProTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,9 +111,12 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(108, 108, 108)
                 .addComponent(OptionRegTxt)
                 .addGap(87, 87, 87)
-                .addComponent(EditProTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
-                .addComponent(OptionDashboardTxt))
+                .addComponent(EditProTxt)
+                .addGap(81, 81, 81)
+                .addComponent(OptionDashboardTxt)
+                .addGap(64, 64, 64)
+                .addComponent(chatBtn)
+                .addContainerGap(172, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -129,11 +144,17 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_OptionDashboardTxtActionPerformed
 
+    private void chatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatBtnActionPerformed
+        // TODO add your handling code here:
+        GoogleTalkChatLogin googleTalkChatLogin = new GoogleTalkChatLogin();
+    }//GEN-LAST:event_chatBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditProTxt;
     private javax.swing.JButton OptionDashboardTxt;
     private javax.swing.JButton OptionRegTxt;
+    private javax.swing.JButton chatBtn;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
