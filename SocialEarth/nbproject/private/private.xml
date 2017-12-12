@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/Business/ChatAPI/ley.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/Business/ChatAPI/add_to_list_refresh.java</file>
             <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/userinterface/UserRole/RegisterForEvent.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/Business/ChatAPI/create_listener_threads.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/Business/ChatAPI/ChatClient.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/Business/ChatAPI/retrieve_roster.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/userinterface/UserRole/UserWorkAreaJPanel.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/DistanceCalculator.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/Business/ChatAPI/new_chat.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/Business/ChatAPI/receive_new_chat.java</file>
-            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/userinterface/UserRole/DashboardForUser.java</file>
+            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/userinterface/EventManagerRole/UpdateEventJpanel.java</file>
+            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/userinterface/EventManagerRole/ViewAllEventJPanel.java</file>
+            <file>file:/C:/Users/ragha/aedAssignment/finalproject_aed2017/SocialEarth/src/userinterface/EventManagerRole/CreateEventJPanel.java</file>
         </group>
     </open-files>
 </project-private>

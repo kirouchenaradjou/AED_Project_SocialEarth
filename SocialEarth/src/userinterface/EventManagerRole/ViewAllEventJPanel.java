@@ -79,8 +79,6 @@ public class ViewAllEventJPanel extends javax.swing.JPanel {
         DeleteEventBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         ViewEventManagerTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -99,15 +97,12 @@ public class ViewAllEventJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(ViewEventManagerTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 40, 550, 180));
-
         UpdateEventBtn.setText("Update");
         UpdateEventBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpdateEventBtnActionPerformed(evt);
             }
         });
-        add(UpdateEventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, -1, -1));
 
         DeleteEventBtn.setText("Delete");
         DeleteEventBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +110,6 @@ public class ViewAllEventJPanel extends javax.swing.JPanel {
                 DeleteEventBtnActionPerformed(evt);
             }
         });
-        add(DeleteEventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, -1));
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +117,35 @@ public class ViewAllEventJPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(UpdateEventBtn)
+                .addGap(137, 137, 137)
+                .addComponent(DeleteEventBtn))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jButton1))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UpdateEventBtn)
+                    .addComponent(DeleteEventBtn))
+                .addGap(61, 61, 61)
+                .addComponent(jButton1))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void UpdateEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEventBtnActionPerformed
