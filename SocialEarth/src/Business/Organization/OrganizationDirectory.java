@@ -30,6 +30,10 @@ public class OrganizationDirectory {
             organization = new TransportOrganization();
             organizationList.add(organization);
         }
+           if (type.getValue().equals(Type.FinanceManagement.getValue())){
+            organization = new FinanceOrganization();
+            organizationList.add(organization);
+        }
        
         return organization;
     }

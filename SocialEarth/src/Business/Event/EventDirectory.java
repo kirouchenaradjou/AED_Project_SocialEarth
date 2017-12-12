@@ -33,7 +33,7 @@ public class EventDirectory {
     }
 
     public Event createAndAddEvent(String eventName, Network network, Zone zone, String venue, Date eventDate, int maxAllowed,
-            boolean isTransportAvail, Date regStartTime, Date regEndTime) {
+            boolean isTransportAvail, Date regStartTime, Date regEndTime,int donation) {
         Event newEvent = new Event();
         newEvent.setEventId(counter++);
         newEvent.setEventName(eventName);
@@ -43,6 +43,7 @@ public class EventDirectory {
         newEvent.setMaxMembersAllowed(maxAllowed);
         newEvent.setRegStartDate(regStartTime);
         newEvent.setRegEndDate(regEndTime);
+        newEvent.setDonation(donation);
         eventList.add(newEvent);
         return newEvent;
     } 

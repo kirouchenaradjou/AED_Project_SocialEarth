@@ -18,6 +18,9 @@ public abstract class WorkRequest {
     private UserAccount userAccount;
     private String eventVenue;
     private int workRequestId;
+    private int donationFromEvent;
+    private int eventBudget;
+    private int transportBudget;
 
     public WorkRequest() {
         requestDate = new Date();
@@ -95,6 +98,31 @@ public abstract class WorkRequest {
         this.workRequestId = workRequestId;
     }
 
+    public int getDonationFromEvent() {
+        return donationFromEvent;
+    }
+
+    public void setDonationFromEvent(int donationFromEvent) {
+        this.donationFromEvent = donationFromEvent;
+    }
+
+    public int getEventBudget() {
+        return eventBudget;
+    }
+
+    public void setEventBudget(int eventBudget) {
+        this.eventBudget = eventBudget;
+    }
+
+    public int getTransportBudget() {
+        return transportBudget;
+    }
+
+    public void setTransportBudget(int transportBudget) {
+        this.transportBudget = transportBudget;
+    }
+    
+    
     @Override
     public String toString() {
         return String.valueOf(this.workRequestId);

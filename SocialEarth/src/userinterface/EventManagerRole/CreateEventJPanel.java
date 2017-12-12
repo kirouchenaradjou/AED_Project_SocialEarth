@@ -6,11 +6,18 @@
 package userinterface.EventManagerRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Event.Event;
 import Business.Network.Network;
+import Business.Organization.EventManagemnetOrg;
+import Business.Organization.FinanceOrganization;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.RoleWorkRequest;
 import Business.Zone.Zone;
 import java.awt.CardLayout;
 import java.util.Date;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -25,10 +32,12 @@ public class CreateEventJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private EcoSystem system;
+    private UserAccount userAccount;
 
-    public CreateEventJPanel(JPanel userProcessContainer, EcoSystem system) {
+    public CreateEventJPanel(JPanel userProcessContainer, EcoSystem system,UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
         this.system = system;
         initializeFields();
         populateNetworkComboBox();
@@ -86,6 +95,8 @@ public class CreateEventJPanel extends javax.swing.JPanel {
         ManagerEventRegStartDate = new com.toedter.calendar.JDateChooser();
         ManagerEventRegEndDate = new com.toedter.calendar.JDateChooser();
         backjButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        donationTextField = new javax.swing.JTextField();
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -137,16 +148,12 @@ public class CreateEventJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Willing to donate??");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(backjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ManagerCreateEventBtn)
-                .addGap(145, 145, 145))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -191,15 +198,27 @@ public class CreateEventJPanel extends javax.swing.JPanel {
                         .addComponent(NoTransportRadioBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(ManagerEventRegStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(ManagerEventRegEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(50, 50, 50)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(50, 50, 50)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ManagerCreateEventBtn)
+                                    .addComponent(ManagerEventRegEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .addComponent(donationTextField)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(ManagerEventRegStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 366, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(backjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,11 +273,15 @@ public class CreateEventJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ManagerEventRegEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ManagerCreateEventBtn)
-                    .addComponent(backjButton1))
-                .addContainerGap())
+                    .addComponent(jLabel1)
+                    .addComponent(donationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(backjButton1)
+                .addGap(16, 16, 16)
+                .addComponent(ManagerCreateEventBtn)
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -285,12 +308,41 @@ public class CreateEventJPanel extends javax.swing.JPanel {
         boolean isTransportAvail = YesTransportRadioBtn.isEnabled();
         Date eventRegStartDate = ManagerEventRegStartDate.getDate();
         Date eventRegEndDate = ManagerEventRegEndDate.getDate();
+        int donation = Integer.parseInt(donationTextField.getText());
         Event newEvent = system.getEventDirectory().createAndAddEvent(eventName, selectedNetwork,
                 selectedZone, venueName, eventDate, maxAllowed,
-                isTransportAvail, eventRegStartDate, eventRegEndDate);
+                isTransportAvail, eventRegStartDate, eventRegEndDate,donation);
         newEvent.setEventName(eventName);
         
         JOptionPane.showMessageDialog(null, "New event has been created successfully !!", "Waring", JOptionPane.WARNING_MESSAGE);
+        //send the event to the finanace department for bugeting
+         RoleWorkRequest newRequest = new RoleWorkRequest();
+        Random rand = new Random();
+        newRequest.setWorkRequestId(rand.nextInt(50) + 1);
+        newRequest.setSender(userAccount);
+        newRequest.setUserAccount(userAccount);
+        newRequest.setMessage(eventName);
+        newRequest.setEventVenue(venueName);
+        newRequest.setDonationFromEvent(donation);
+        
+        Organization org = null;
+        for (Network eachNetwork : system.getNetworkDirectory().getNetworkList()) {
+            for (Zone eachZone : eachNetwork.getZoneDirectory().getZoneList()) {
+                for (Enterprise eachEnterprise : eachZone.getEnterpriseDirectory().getEnterpriseList()) {
+                    for (Organization eachOrg : eachEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                        if (eachOrg instanceof FinanceOrganization) {
+                            org = eachOrg;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (org != null) {
+            org.getWorkQueue().addNewRequest(newRequest);
+            userAccount.getWorkQueue().addNewRequest(newRequest);
+        }
+        
     }//GEN-LAST:event_ManagerCreateEventBtnActionPerformed
 
     private void networkComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkComboBoxActionPerformed
@@ -318,6 +370,8 @@ public class CreateEventJPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton YesTransportRadioBtn;
     private javax.swing.JButton backjButton1;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField donationTextField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

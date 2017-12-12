@@ -25,6 +25,7 @@ public class Event {
     private Date regStartDate;
     private Date regEndDate;
     private String venue;
+    private int donation;
 
     public Event() {
         zone = new Zone();
@@ -114,6 +115,14 @@ public class Event {
         this.network = network;
     }
 
+    public int getDonation() {
+        return donation;
+    }
+
+    public void setDonation(int donation) {
+        this.donation = donation;
+    }
+    
     @Override
     public String toString() {
         return this.eventName;
