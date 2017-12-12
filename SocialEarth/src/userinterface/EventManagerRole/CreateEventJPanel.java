@@ -289,6 +289,8 @@ public class CreateEventJPanel extends javax.swing.JPanel {
                 selectedZone, venueName, eventDate, maxAllowed,
                 isTransportAvail, eventRegStartDate, eventRegEndDate);
         newEvent.setEventName(eventName);
+        
+        JOptionPane.showMessageDialog(null, "New event has been created successfully !!", "Waring", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_ManagerCreateEventBtnActionPerformed
 
     private void networkComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkComboBoxActionPerformed

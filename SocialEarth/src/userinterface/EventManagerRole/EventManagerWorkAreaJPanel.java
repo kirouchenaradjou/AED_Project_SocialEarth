@@ -11,6 +11,7 @@ import Business.Organization.EventManagemnetOrg;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import Business.Event.Event;
 
 /**
  *
@@ -26,6 +27,7 @@ public class EventManagerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private EventManagemnetOrg organization;
     private EcoSystem system;
+    private Event event;
     private boolean flag = false;
 
     public EventManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EventManagemnetOrg organization, EcoSystem system) {
@@ -105,12 +107,16 @@ public class EventManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(addNewEventBtn)
                 .addGap(18, 18, 18)
                 .addComponent(WorkRequestBtn)
-                .addContainerGap())
+                .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void ViewAllEventsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAllEventsBtnActionPerformed
         // TODO add your handling code here:
+        ViewAllEventJPanel viewAllEventJPanel = new ViewAllEventJPanel(userProcessContainer, userAccount, organization, system, event);
+        userProcessContainer.add("createEventJPanel", viewAllEventJPanel);
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
+        cardLayout.next(userProcessContainer);
     }//GEN-LAST:event_ViewAllEventsBtnActionPerformed
 
     private void WorkRequestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WorkRequestBtnActionPerformed

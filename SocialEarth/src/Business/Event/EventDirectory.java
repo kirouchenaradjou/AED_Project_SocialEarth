@@ -46,5 +46,8 @@ public class EventDirectory {
         eventList.add(newEvent);
         return newEvent;
     } 
-
+    
+    public void deleteEvent(Event event){
+    eventList.remove(event);
+    }
 }
