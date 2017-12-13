@@ -1,5 +1,6 @@
 package Business;
 
+import Business.Event.Event;
 import Business.Event.EventDirectory;
 import Business.Network.NetworkDirectory;
 import Business.Organization.Organization;
@@ -8,6 +9,7 @@ import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  *
@@ -18,7 +20,7 @@ public class EcoSystem extends Organization {
     private static EcoSystem business;
     private NetworkDirectory networkDirectory;
     private EventDirectory eventDirectory;
-    private HashMap<Integer, UserAccount> registeredUsers;
+    public HashMap<UserAccount, ArrayList<Event>> registeredUsers;
     public static int counter = 4000;
 
     public static EcoSystem getInstance() {
@@ -32,7 +34,7 @@ public class EcoSystem extends Organization {
         super(null);
         this.networkDirectory = new NetworkDirectory();
         this.eventDirectory = new EventDirectory();
-        this.registeredUsers = new HashMap<Integer, UserAccount>();
+        this.registeredUsers = new HashMap<UserAccount, ArrayList<Event>>();
     }
 
     @Override
@@ -58,12 +60,31 @@ public class EcoSystem extends Organization {
         this.eventDirectory = eventDirectory;
     }
 
-    public HashMap<Integer, UserAccount> getRegisteredUsers() {
+    public HashMap<UserAccount, ArrayList<Event>> getRegisteredUsers() {
         return registeredUsers;
     }
 
-    public void addRegisteredEventUser(UserAccount account) {
-        registeredUsers.put(counter++, account);
+    public void addRegisteredEventUser(UserAccount account, Event event) {
+        ArrayList<Event> eventList = new ArrayList<>();
+        if (!registeredUsers.isEmpty()) {
+            Set<UserAccount> userAccountList = registeredUsers.keySet();
+            if (!userAccountList.isEmpty()) {
+                if (userAccountList.contains(account)) {
+                    if (!registeredUsers.get(account).contains(event)) {
+                        registeredUsers.get(account).add(event);
+                    }
+                } else {
+                    eventList.add(event);
+                    registeredUsers.put(account, eventList);
+                }
+            } else {
+                eventList.add(event);
+                registeredUsers.put(account, eventList);
+            }
+        } else {
+            eventList.add(event);
+            registeredUsers.put(account, eventList);
+        }
     }
 
     public boolean checkIfUsernameIsUnique(String username) {
