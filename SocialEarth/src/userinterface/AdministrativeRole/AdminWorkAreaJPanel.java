@@ -62,36 +62,59 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
         chatBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 204, 204));
+        setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("My Work Area -Aminstrative Role");
+        add(jLabel1);
+        jLabel1.setBounds(202, 16, 396, 29);
 
+        userJButton.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         userJButton.setText("Manage User");
         userJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userJButtonActionPerformed(evt);
             }
         });
+        add(userJButton);
+        userJButton.setBounds(272, 237, 250, 49);
 
+        manageEmployeeJButton.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         manageEmployeeJButton.setText("Manage Employee");
         manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageEmployeeJButtonActionPerformed(evt);
             }
         });
+        add(manageEmployeeJButton);
+        manageEmployeeJButton.setBounds(272, 182, 250, 39);
 
+        manageOrganizationJButton.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         manageOrganizationJButton.setText("Manage Organization");
         manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageOrganizationJButtonActionPerformed(evt);
             }
         });
+        add(manageOrganizationJButton);
+        manageOrganizationJButton.setBounds(272, 111, 250, 50);
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel.setForeground(new java.awt.Color(255, 255, 255));
         enterpriseLabel.setText("EnterPrise :");
+        add(enterpriseLabel);
+        enterpriseLabel.setBounds(58, 63, 120, 30);
 
+        valueLabel.setForeground(new java.awt.Color(255, 255, 255));
         valueLabel.setText("<value>");
+        add(valueLabel);
+        valueLabel.setBounds(208, 73, 130, 20);
 
+        chatBtn.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         chatBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chaticon.png"))); // NOI18N
         chatBtn.setText("Answer Queries");
         chatBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -99,53 +122,13 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                 chatBtnActionPerformed(evt);
             }
         });
+        add(chatBtn);
+        chatBtn.setBounds(272, 295, 250, 55);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(userJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(391, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(valueLabel)))
-                .addGap(10, 10, 10)
-                .addComponent(manageOrganizationJButton)
-                .addGap(21, 21, 21)
-                .addComponent(manageEmployeeJButton)
-                .addGap(26, 26, 26)
-                .addComponent(userJButton)
-                .addGap(29, 29, 29)
-                .addComponent(chatBtn)
-                .addContainerGap(329, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/sysadminPageIcon.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        add(jLabel2);
+        jLabel2.setBounds(1, 0, 860, 660);
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
@@ -180,6 +163,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton chatBtn;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton manageEmployeeJButton;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton userJButton;

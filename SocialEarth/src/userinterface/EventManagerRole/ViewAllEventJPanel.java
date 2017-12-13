@@ -7,19 +7,15 @@ package userinterface.EventManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Network.Network;
 import Business.Organization.EventManagemnetOrg;
-import Business.Organization.Organization;
-import Business.Organization.TransportOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.RoleWorkRequest;
-import Business.WorkQueue.WorkRequest;
-import Business.Zone.Zone;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Business.Event.Event;
+import java.awt.Component;
+import userinterface.TransportManagerRole.TransportRoleWorkAreaJPanel;
 
 /**
  *
@@ -77,7 +73,11 @@ public class ViewAllEventJPanel extends javax.swing.JPanel {
         ViewEventManagerTbl = new javax.swing.JTable();
         UpdateEventBtn = new javax.swing.JButton();
         DeleteEventBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        backJButton = new javax.swing.JButton();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ViewEventManagerTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,12 +97,15 @@ public class ViewAllEventJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(ViewEventManagerTbl);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 550, 180));
+
         UpdateEventBtn.setText("Update");
         UpdateEventBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpdateEventBtnActionPerformed(evt);
             }
         });
+        add(UpdateEventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
 
         DeleteEventBtn.setText("Delete");
         DeleteEventBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -110,42 +113,23 @@ public class ViewAllEventJPanel extends javax.swing.JPanel {
                 DeleteEventBtnActionPerformed(evt);
             }
         });
+        add(DeleteEventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ragha\\Desktop\\2.png")); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 220, 230));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel2.setText("Event Details");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 340, -1));
+
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Back3Blue.png"))); // NOI18N
+        backJButton.setText("Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backJButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(UpdateEventBtn)
-                .addGap(137, 137, 137)
-                .addComponent(DeleteEventBtn))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jButton1))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(UpdateEventBtn)
-                    .addComponent(DeleteEventBtn))
-                .addGap(61, 61, 61)
-                .addComponent(jButton1))
-        );
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void UpdateEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEventBtnActionPerformed
@@ -179,19 +163,24 @@ public class ViewAllEventJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_DeleteEventBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        TransportRoleWorkAreaJPanel dwjp = (TransportRoleWorkAreaJPanel) component;
+        dwjp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeleteEventBtn;
     private javax.swing.JButton UpdateEventBtn;
     private javax.swing.JTable ViewEventManagerTbl;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton backJButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

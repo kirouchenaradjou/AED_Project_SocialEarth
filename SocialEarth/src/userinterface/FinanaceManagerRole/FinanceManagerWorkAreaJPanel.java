@@ -105,9 +105,9 @@ public class FinanceManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addGap(79, 79, 79)
                 .addComponent(WorkRequestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(41, 41, 41)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
