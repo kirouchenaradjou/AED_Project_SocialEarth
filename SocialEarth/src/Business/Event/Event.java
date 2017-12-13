@@ -75,7 +75,7 @@ public class Event {
         this.maxMembersAllowed = maxMembersAllowed;
     }
 
-    public boolean isIsTransportAvail() {
+    public boolean isTransportAvail() {
         return isTransportAvail;
     }
 

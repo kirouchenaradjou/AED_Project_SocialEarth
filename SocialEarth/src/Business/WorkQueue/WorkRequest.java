@@ -21,6 +21,7 @@ public abstract class WorkRequest {
     private int donationFromEvent;
     private int eventBudget;
     private int transportBudget;
+    private boolean needTransport;
 
     public WorkRequest() {
         requestDate = new Date();
@@ -121,8 +122,15 @@ public abstract class WorkRequest {
     public void setTransportBudget(int transportBudget) {
         this.transportBudget = transportBudget;
     }
-    
-    
+
+    public boolean getNeedTransport() {
+        return needTransport;
+    }
+
+    public void setNeedTransport(boolean needTransport) {
+        this.needTransport = needTransport;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(this.workRequestId);

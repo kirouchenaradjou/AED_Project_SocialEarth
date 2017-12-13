@@ -66,7 +66,7 @@ public class EcoSystem extends Organization {
 
     public void addRegisteredEventUser(UserAccount account, Event event) {
         ArrayList<Event> eventList = new ArrayList<>();
-        if (!registeredUsers.isEmpty()) {
+        if (registeredUsers != null) {
             Set<UserAccount> userAccountList = registeredUsers.keySet();
             if (!userAccountList.isEmpty()) {
                 if (userAccountList.contains(account)) {

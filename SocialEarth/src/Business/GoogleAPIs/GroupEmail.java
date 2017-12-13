@@ -60,21 +60,19 @@ public class GroupEmail {
         });
 
         try {
-            String emailBodyText = "<br> Thank you for registering for the "
+            String emailBodyText = "Thank you for registering for the "
                     + registeredEvent.getEventName()
-                    + ".<br><br> This event is happening at "
+                    + ".This event is happening at "
                     + registeredEvent.getVenue() + ", "
                     + registeredEvent.getZone() + ", "
-                    + registeredEvent.getNetwork() + "<br><br> See you there!!";
-//            for (UserAccount eachUser : registeredEventUsers.values()) {
+                    + registeredEvent.getNetwork() + "See you there!!";
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(registeredUser.getEmployee().getEmail()));
             message.setSubject("Great! You have successfully registered for the event!!");
             message.setText("Hey " + registeredUser.getEmployee().getName() + "!"
-                    + "<br>" + emailBodyText);
+                    + emailBodyText);
             Transport.send(message);
-//            }
             System.out.println("Done");
 
         } catch (MessagingException e) {

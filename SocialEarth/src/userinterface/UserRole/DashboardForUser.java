@@ -14,6 +14,7 @@ import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,24 +45,26 @@ public class DashboardForUser extends javax.swing.JPanel {
     }
 
     public void populateRegisteredEventTable() {
-
-        DefaultTableModel model = (DefaultTableModel) registeredEventsTable.getModel();
-        model.setRowCount(0);
-        HashMap<UserAccount, ArrayList<Event>> registeredEvents = system.getRegisteredUsers();
-        ArrayList<Event> eventList = new ArrayList<>();
-        if (registeredEvents != null && !registeredEvents.isEmpty())//.get(userAccount);
-        {
-            eventList = registeredEvents.get(userAccount);
-            if (!eventList.isEmpty()) {
-                for (Event eachEvent : eventList) {
-                    Object[] row = new Object[4];
-                    row[0] = eachEvent;
-                    row[1] = eachEvent.getVenue();
-                    row[2] = eachEvent.getEventDate();
-                    row[3] = eachEvent.isIsTransportAvail();
-                    model.addRow(row);
+        try {
+            DefaultTableModel model = (DefaultTableModel) registeredEventsTable.getModel();
+            model.setRowCount(0);
+            HashMap<UserAccount, ArrayList<Event>> registeredEvents = system.getRegisteredUsers();
+            ArrayList<Event> eventList = new ArrayList<>();
+            if (registeredEvents != null) {
+                eventList = registeredEvents.get(userAccount);
+                if (eventList != null) {
+                    for (Event eachEvent : eventList) {
+                        Object[] row = new Object[4];
+                        row[0] = eachEvent;
+                        row[1] = eachEvent.getVenue();
+                        row[2] = eachEvent.getEventDate();
+                        row[3] = eachEvent.isTransportAvail();
+                        model.addRow(row);
+                    }
                 }
             }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No history of registered events!");
         }
     }
 

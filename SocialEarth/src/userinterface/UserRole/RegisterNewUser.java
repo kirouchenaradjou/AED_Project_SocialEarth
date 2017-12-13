@@ -268,9 +268,17 @@ public class RegisterNewUser extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Email cannot be empty!", "Warning!", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        String confirmEmail = confirmemailTextField.getText();
+        if (confirmEmail.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Confirm email cannot be empty!", "Warning!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!email.equals(confirmEmail)) {
+            JOptionPane.showMessageDialog(null, "Email ids do not match!", "Warning!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Zone zone = (Zone) ZoneComboBox.getSelectedItem();
         Employee employee = system.getEmployeeDirectory().createEmployee(name, zone, city, address);
-        //to do
         employee.setEmail(email);
         UserAccount useraccount = system.getUserAccountDirectory().createUserAccount(signupUsername, password, employee, new UserRole());
 

@@ -49,7 +49,6 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
 
         model.setRowCount(0);
-//        organization.getWorkQueue().getWorkRequestList().removeAll();
 
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[7];
@@ -171,35 +170,43 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
         boolean isBreakNeeded = false;
-
         int selectedRow = workRequestJTable.getSelectedRow();
-
         if (selectedRow < 0) {
             return;
         }
-
         WorkRequest request = (WorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
         request.setReceiver(userAccount);
-        request.setStatus("In Progress");
+        if (request.getNeedTransport() == false) {
+            request.setNeedTransport(false);
+            request.setStatus("Approved");
+        } else {
+            request.setStatus("In Progress");
+        }
         populateTable();
-        JOptionPane.showMessageDialog(null, "Assigned to you and Sending it to Transport team on your behalf", "Information", JOptionPane.INFORMATION_MESSAGE);
-        // Send it to the Transport Organization
-        RoleWorkRequest requestToTransport = new RoleWorkRequest();
-        requestToTransport.setWorkRequestId(request.getWorkRequestId());
-        requestToTransport.setMessage(request.getMessage());
-        requestToTransport.setSender(userAccount);
-        requestToTransport.setUserAccount(request.getUserAccount());
-        requestToTransport.setEventVenue(request.getEventVenue());
+        if (request.getNeedTransport() == true) {
+            RoleWorkRequest requestToTransport = new RoleWorkRequest();
+            requestToTransport.setWorkRequestId(request.getWorkRequestId());
+            requestToTransport.setMessage(request.getMessage());
+            requestToTransport.setSender(userAccount);
+            requestToTransport.setUserAccount(request.getUserAccount());
+            requestToTransport.setEventVenue(request.getEventVenue());
+            requestToTransport.setNeedTransport(true);
+            JOptionPane.showMessageDialog(null, "Assigned to you and Sending it to Transport team on your behalf", "Information", JOptionPane.INFORMATION_MESSAGE);
 
-        Organization org = null;
-        for (Network eachNetwork : system.getNetworkDirectory().getNetworkList()) {
-            for (Zone eachZone : eachNetwork.getZoneDirectory().getZoneList()) {
-                for (Enterprise eachEnterprise : eachZone.getEnterpriseDirectory().getEnterpriseList()) {
-                    for (Organization eachOrg : eachEnterprise.getOrganizationDirectory().getOrganizationList()) {
-                        if (eachOrg instanceof TransportOrganization) {
-                            org = eachOrg;
-                            isBreakNeeded = true;
-                            break;
+            // Send it to the Transport Organization
+            Organization org = null;
+            for (Network eachNetwork : system.getNetworkDirectory().getNetworkList()) {
+                for (Zone eachZone : eachNetwork.getZoneDirectory().getZoneList()) {
+                    for (Enterprise eachEnterprise : eachZone.getEnterpriseDirectory().getEnterpriseList()) {
+                        for (Organization eachOrg : eachEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                            if (eachOrg instanceof TransportOrganization) {
+                                org = eachOrg;
+                                isBreakNeeded = true;
+                                break;
+                            }
+                            if (isBreakNeeded) {
+                                break; //will make you break from outer loop as well
+                            }
                         }
                         if (isBreakNeeded) {
                             break; //will make you break from outer loop as well
@@ -213,16 +220,11 @@ public class ManageWorkRequestPanel extends javax.swing.JPanel {
                     break; //will make you break from outer loop as well
                 }
             }
-            if (isBreakNeeded) {
-                break; //will make you break from outer loop as well
+            if (org != null) {
+                org.getWorkQueue().addNewRequest(requestToTransport);
+                userAccount.getWorkQueue().addNewRequest(requestToTransport);
             }
         }
-        if (org != null) {
-            org.getWorkQueue().addNewRequest(requestToTransport);
-            userAccount.getWorkQueue().addNewRequest(requestToTransport);
-        }
-        JOptionPane.showMessageDialog(null, "Processing!!!", "Information", JOptionPane.INFORMATION_MESSAGE);
-
     }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void backjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButton1ActionPerformed
