@@ -10,8 +10,20 @@ import Business.Enterprise.Enterprise;
 import Business.Event.Event;
 import Business.Organization.FinanceOrganization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.WorkRequest;
+import Business.Chart.BarCharGeneration;
 import java.awt.CardLayout;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.general.DefaultPieDataset;
+import userinterface.AdministrativeRole.AdminWorkAreaJPanel;
 
 /**
  *
@@ -37,6 +49,7 @@ public class FinanceManagerWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.system = system;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +61,7 @@ public class FinanceManagerWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel3 = new javax.swing.JLabel();
         WorkRequestBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -60,17 +74,28 @@ public class FinanceManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/budgeticon.jpg"))); // NOI18N
+        jButton1.setText("Monitor Budget");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(293, 293, 293)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(WorkRequestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(293, 293, 293)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(326, 326, 326)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(WorkRequestBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(361, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,9 +103,11 @@ public class FinanceManagerWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(jLabel3)
-                .addGap(164, 164, 164)
-                .addComponent(WorkRequestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addComponent(WorkRequestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(274, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -91,9 +118,52 @@ public class FinanceManagerWorkAreaJPanel extends javax.swing.JPanel {
         cardLayout.next(userProcessContainer);
     }//GEN-LAST:event_WorkRequestBtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int noOfEvents = 0, transBudget = 0, eventBudget = 0,donation=0;
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
+            noOfEvents++;
+            transBudget = transBudget + request.getTransportBudget();
+            eventBudget = eventBudget + request.getEventBudget();
+            donation = donation + request.getDonationFromEvent();
+
+        }
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        dataset.setValue("Event Organization", new Integer(transBudget));
+        dataset.setValue("Transport Organization", new Integer(transBudget));
+        dataset.setValue("No of Events", new Integer(noOfEvents));
+        dataset.setValue("Donation", new Integer(donation));
+
+        JFreeChart chart = ChartFactory.createPieChart3D(
+                "Total Finance Statistics", // chart title
+                dataset, // data
+                true, // include legend
+                true,
+                false);
+
+        final PiePlot3D plot = (PiePlot3D) chart.getPlot();
+        plot.setStartAngle(270);
+        plot.setForegroundAlpha(0.60f);
+        plot.setInteriorGap(0.02);
+        int width = 1000;
+        /* Width of the image */
+        int height = 500;
+        /* Height of the image */
+        File pieChart_totalBudget = new File("pie_totalbudget.jpeg");
+        try {
+            ChartUtilities.saveChartAsJPEG(pieChart_totalBudget, chart, width, height);
+            DisplayStatistics displayStatistics = new DisplayStatistics(pieChart_totalBudget);
+            userProcessContainer.add("DisplayStatistics", displayStatistics);
+            CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
+            cardLayout.next(userProcessContainer);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminWorkAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton WorkRequestBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

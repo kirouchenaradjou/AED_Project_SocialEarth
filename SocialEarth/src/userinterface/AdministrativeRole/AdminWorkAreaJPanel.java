@@ -13,7 +13,16 @@ import UserInterface.AdministrativeRole.ManageEmployeeJPanel;
 import UserInterface.AdministrativeRole.ManageOrganizationJPanel;
 import UserInterface.AdministrativeRole.ManageUserAccountJPanel;
 import java.awt.CardLayout;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
