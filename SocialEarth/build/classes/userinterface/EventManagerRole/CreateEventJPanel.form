@@ -150,7 +150,7 @@
                   <Component id="jLabel10" min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="ManagerEventRegEndDate" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="donationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
